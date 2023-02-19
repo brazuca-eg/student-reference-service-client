@@ -43,8 +43,10 @@ public class StudentLoginServlet extends HttpServlet {
                 req.setAttribute("error", "All fields should be entered for login operation");
                 doGet(req, resp);
             } else {
-                AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-                StudentService studentService = annotationConfigApplicationContext.getBean("studentService", StudentService.class);
+                AnnotationConfigApplicationContext annotationConfigApplicationContext =
+                        new AnnotationConfigApplicationContext(AppConfig.class);
+                StudentService studentService = annotationConfigApplicationContext
+                        .getBean("studentService", StudentService.class);
 
                 StudentLoginPayload studentLoginPayload = new StudentLoginPayload();
                 studentLoginPayload.setEmail(req.getParameter("email"));
@@ -54,10 +56,12 @@ public class StudentLoginServlet extends HttpServlet {
                 if (student == null) {
                     req.setAttribute("error", "No user with such params");
                     doGet(req, resp);
-                } else {
+                } else if (Objects.nonNull(student.getApproved()) && student.getApproved()) {
                     HttpSession session = req.getSession();
                     session.setAttribute("current", student);
-                    resp.sendRedirect(req.getContextPath() + "/main");
+                    resp.sendRedirect(req.getContextPath() + "/student/main");
+                } else {
+                    resp.sendRedirect(req.getContextPath() + "/student/waiting");
                 }
             }
         }

@@ -11,16 +11,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Student {
+public class Speciality {
     private Long id;
-    private String email;
-    private String password;
-    private String name;
-    private String surname;
-    private String fatherhood;
-    private Boolean approved;
-    private Ticket ticket;
 
-    private StudentGroup studentGroup;
-    private List<Request> requests;
+    private String name;
+
+    private String shortName;
+
+    private Integer number;
+
+    private List<StudentGroup> studentGroups;
+
+    private Faculty faculty;
 }

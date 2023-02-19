@@ -5,22 +5,25 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Student {
+public class StudentGroup {
     private Long id;
-    private String email;
-    private String password;
-    private String name;
-    private String surname;
-    private String fatherhood;
-    private Boolean approved;
-    private Ticket ticket;
 
-    private StudentGroup studentGroup;
-    private List<Request> requests;
+    private String name;
+
+    private LocalDate startYear;
+
+    private LocalDate endYear;
+
+    private String learnForm;
+
+    private List<Student> students;
+
+    private Speciality speciality;
 }
