@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @ComponentScan("com.nure.kravchenko.student.reference.client")
 public class AppConfig {
+
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();

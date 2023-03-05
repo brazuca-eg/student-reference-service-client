@@ -1,13 +1,28 @@
 package com.nure.kravchenko.student.reference.client.payload;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class CreateStudentPayload {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class RegistrationDto {
+
     private String name;
+
     private String surname;
+
     private String fatherhood;
+
+    private Character gender;
+
     private String email;
 
     private String password;
+
+    private String role;
+
 }
