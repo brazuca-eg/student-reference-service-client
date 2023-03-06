@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("token", userLoggedInDto.getToken());
                     }
                     if (isApprovedAccount) {
-                        System.out.print("approved");
+                        resp.sendRedirect(req.getContextPath() + "/student/main");
                     } else {
                         resp.sendRedirect(req.getContextPath() + "/waiting");
                     }

@@ -25,7 +25,7 @@
 
   <h2>My group</h2>
 
-  <h4>Name</h4>
+  <h4>Group</h4>
   <h3><c:out value="${group.name}"/></h3>
 
   <h4>Learning form</h4>

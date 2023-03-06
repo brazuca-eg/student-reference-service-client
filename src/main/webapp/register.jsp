@@ -1,12 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!doctype html>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-</head>
+<%--<head>--%>
+<%--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>--%>
+<%--    <meta charset=utf-8>--%>
+<%--</head>--%>
 
 <body>
 

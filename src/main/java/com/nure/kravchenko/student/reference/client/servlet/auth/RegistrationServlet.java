@@ -26,6 +26,7 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         if (Objects.nonNull(req.getParameter("submitButton"))) {
             AnnotationConfigApplicationContext annotationConfigApplicationContext =
                     new AnnotationConfigApplicationContext(AppConfig.class);
@@ -56,7 +57,7 @@ public class RegistrationServlet extends HttpServlet {
             registrationDto.setRole(role);
 
             boolean registerResult = authService.register(registrationDto);
-            if(registerResult){
+            if (registerResult) {
                 resp.sendRedirect(req.getContextPath() + "/login");
             } else {
                 req.setAttribute("error", "Error while creating");
