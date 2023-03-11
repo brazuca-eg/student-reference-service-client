@@ -35,7 +35,11 @@ public class StudentRequestsServlet extends HttpServlet {
         List<ReasonDto> reasons = studentService.getAllRequestReasonsForStudent(token);
         req.setAttribute("reasons", reasons);
 
-        List<RequestDto> requests = studentService.getRequestForStudent(id, token);
+        String requestFilter = null;
+        if(Objects.nonNull(req.getParameter("reasonNameFilter"))){
+            requestFilter = "reasonName";
+        }
+        List<RequestDto> requests = studentService.getRequestForStudent(id, requestFilter, token);
         req.setAttribute("requests", requests);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/student_requests.jsp");

@@ -63,9 +63,9 @@ public class StudentService {
         return responseEntity.getBody();
     }
 
-    public List<RequestDto> getRequestForStudent(Long id, String token) {
+    public List<RequestDto> getRequestForStudent(Long id, String filter, String token) {
         ResponseEntity<List<RequestDto>> responseEntity = communication.getRestTemplate()
-                .exchange(communication.getStudentReferenceRestUrl() + "/students/" + id + "/requests",
+                .exchange(communication.getStudentReferenceRestUrl() + "/students/" + id + "/requests?filter=" + filter,
                         HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
                         new ParameterizedTypeReference<List<RequestDto>>() {
                         });

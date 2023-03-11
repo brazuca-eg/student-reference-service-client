@@ -50,15 +50,23 @@ public class LoginServlet extends HttpServlet {
                 } else {
                     boolean isApprovedAccount = userLoggedInDto.isApproved();
                     String role = userLoggedInDto.getRole();
+                    HttpSession session = req.getSession();
+                    session.setAttribute("role", role);
+                    session.setAttribute("userId", userLoggedInDto.getId());
+                    session.setAttribute("token", userLoggedInDto.getToken());
                     if (StringUtils.equalsIgnoreCase(Role.STUDENT.name(), role)) {
-                        HttpSession session = req.getSession();
-                        session.setAttribute("role", role);
-                        session.setAttribute("userId", userLoggedInDto.getId());
-                        session.setAttribute("token", userLoggedInDto.getToken());
+                        if (isApprovedAccount) {
+                            resp.sendRedirect(req.getContextPath() + "/student/main");
+                        }
+                    } else if (StringUtils.equalsIgnoreCase(Role.WORKER.name(), role)) {
+                        if (isApprovedAccount) {
+                            resp.sendRedirect(req.getContextPath() + "/worker/main");
+                        }
+                    } else if(StringUtils.equalsIgnoreCase(Role.ADMIN.name(), role)){
+                        resp.sendRedirect(req.getContextPath() + "/admin/main");
                     }
-                    if (isApprovedAccount) {
-                        resp.sendRedirect(req.getContextPath() + "/student/main");
-                    } else {
+
+                    if (!isApprovedAccount) {
                         resp.sendRedirect(req.getContextPath() + "/waiting");
                     }
                 }

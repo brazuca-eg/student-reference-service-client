@@ -6,6 +6,10 @@
 
 <body>
 
+<form action="#" method="get">
+    <button type="submit" value="reasonNameFilter" name="reasonNameFilter">Filter by reason name</button>
+</form>
+
 <p>My requests</p>
 <c:forEach items="${requests}" var="element">
     <p><c:out value="${element.startDate}"/></p>
