@@ -25,10 +25,26 @@
                 <option value="<c:out value="${element.id}"/>"><c:out value="${element.name}"/></option>
             </c:forEach>
         </select>
-        <button type="submit" value="submit" name="approveButton">Approve</button>
+        <button type="submit" value="submit" name="approveWorkerButton">Approve</button>
     </form>
 </c:forEach>
 
+<h2>Students that need approval</h2>
+
+
+<c:forEach items="${waitingApprovalStudents}" var="element">
+    <p><c:out value="${element.email}"/></p>
+    <p><c:out value="${element.name}"/></p>
+    <p><c:out value="${element.surname}"/></p>
+    <p><c:out value="${element.fatherhood}"/></p>
+    <p><c:out value="${element.gender}"/></p>
+
+    <form action="#" method="get">
+        <button name = "showStudentButton"  id="showStudentButton" type="submit">Show student</button>
+        <input id="studentId" name="studentId" type="hidden" value="<c:out value = "${element.id}"/>">
+    </form>
+
+</c:forEach>
 
 </body>
 
