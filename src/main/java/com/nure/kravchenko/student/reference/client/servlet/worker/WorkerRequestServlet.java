@@ -1,7 +1,7 @@
 package com.nure.kravchenko.student.reference.client.servlet.worker;
 
 import com.nure.kravchenko.student.reference.client.config.AppConfig;
-import com.nure.kravchenko.student.reference.client.server.RequestDto;
+import com.nure.kravchenko.student.reference.client.server.WorkerRequestDto;
 import com.nure.kravchenko.student.reference.client.service.WorkerService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -31,7 +31,7 @@ public class WorkerRequestServlet extends HttpServlet {
                 .getBean("workerService", WorkerService.class);
 
 
-        List<RequestDto> waitingRequestDtos = workerService.getNonAssignedRequestsByWorkerFaculty(id, token);
+        List<WorkerRequestDto> waitingRequestDtos = workerService.getNonAssignedRequestsByWorkerFaculty(id, token);
         req.setAttribute("waitingRequests", waitingRequestDtos);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/worker_requests.jsp");
@@ -53,7 +53,7 @@ public class WorkerRequestServlet extends HttpServlet {
             Long requestId = Long.valueOf(req.getParameter("approveRequest"));
             workerService.approveRequest(id, requestId, true, token);
         }
-        if(Objects.nonNull(req.getParameter("denyRequest"))){
+        if (Objects.nonNull(req.getParameter("denyRequest"))) {
             Long requestId = Long.valueOf(req.getParameter("denyRequest"));
         }
 

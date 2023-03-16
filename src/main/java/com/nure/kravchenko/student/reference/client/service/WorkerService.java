@@ -36,11 +36,11 @@ public class WorkerService {
         return responseEntity.getBody();
     }
 
-    public List<RequestDto> getNonAssignedRequestsByWorkerFaculty(Long id, String token) {
-        ResponseEntity<List<RequestDto>> responseEntity = communication.getRestTemplate()
+    public List<WorkerRequestDto> getNonAssignedRequestsByWorkerFaculty(Long id, String token) {
+        ResponseEntity<List<WorkerRequestDto>> responseEntity = communication.getRestTemplate()
                 .exchange(communication.getStudentReferenceRestUrl() + "/workers/" + id + "/requests/nonAssigned",
                         HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
-                        new ParameterizedTypeReference<List<RequestDto>>() {
+                        new ParameterizedTypeReference<List<WorkerRequestDto>>() {
                         });
 
         return responseEntity.getBody();

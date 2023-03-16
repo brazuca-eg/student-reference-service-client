@@ -4,17 +4,17 @@
 <!doctype html>
 
 <head>
-    <title>Admon creation page</title>
+    <title>Admin creation page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 <body>
 
-<h2>Create new faculty</h2>
+<h2>Додати новий факультет до системи</h2>
 
 <form action="#" method="post">
-    <input type="text" id="name" name="name" placeholder="Enter the name of the faculty"/>
-    <input type="text" id="shortName" name="shortName" placeholder="Enter the short name of the faculty"/>
+    <input type="text" id="name" name="name" placeholder="Введіть назву факультету"/>
+    <input type="text" id="shortName" name="shortName" placeholder="Введіть скорочену назву факультету"/>
 
     <button type="submit" value="submit" name="createFacultyButton">Create faculty</button>
 </form>

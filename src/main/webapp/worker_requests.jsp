@@ -10,41 +10,41 @@
     <button type="submit" value="reasonNameFilter" name="reasonNameFilter">Filter by reason name</button>
 </form>
 
-<p>Waiting requests</p>
+<p>Заявки на надання довідок від студентів</p>
 
-<c:forEach items="${waitingRequests}" var="element">
-    <p><c:out value="${element.startDate}"/></p>
-    <p><c:out value="${element.endDate}"/></p>
-    <p><c:out value="${element.reasonName}"/></p>
-    <p><c:out value="${element.reasonDescription}"/></p>
-
-    <form action="#" method="post">
-        <button type="submit" value="<c:out value="${element.id}"/>" name="approveRequest">Approve request</button>
-    </form>
-    <form action="#" method="post">
-        <button type="submit" value="<c:out value="${element.id}"/>" name="denyRequest">Deny request</button>
-    </form>
-</c:forEach>
-
-
-
-<%--<form action="#" method="post">--%>
-
-<%--    <input type="text" id="serialNumber" name="serialNumber" placeholder="Serial number of the student ticket"></p>--%>
-
-<%--    <input type="text" id="number" name="number" placeholder="Number of the student ticket"></p>--%>
-
-
-<%--    <select name="requestReason" id="requestReason">--%>
-<%--        <c:forEach items="${reasons}" var="element">--%>
-<%--            <h3><c:out value="${element.name}"/></h3>--%>
-<%--            <option value="<c:out value="${element.name}"/>"><c:out value="${element.name}"/></option>--%>
-<%--        </c:forEach>--%>
-<%--    </select>--%>
-
-<%--    <button type="submit" value="submit" name="submitButton">Create request</button>--%>
-
-<%--</form>--%>
+<table style="width:100%">
+    <tr>
+        <th>Дата подання заявки</th>
+        <th>Причина надання довідки</th>
+        <th>Опис причини надання</th>
+        <th>Студент</th>
+        <th>Група</th>
+        <th>Підтвердити надання</th>
+        <th>Відмовити від надання</th>
+    </tr>
+    <c:forEach items="${waitingRequests}" var="element">
+        <tr>
+            <td><c:out value="${element.startDate}"/></td>
+            <td><c:out value="${element.reasonName}"/></td>
+            <td><c:out value="${element.reasonDescription}"/></td>
+            <td><c:out value="${element.studentFullName}"/></td>
+            <td><c:out value="${element.groupName}"/></td>
+            <td>
+                <form action="#" method="post">
+                    <button type="submit" value="<c:out value="${element.id}"/>" name="approveRequest">Підтвердити
+                        надання
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="#" method="post">
+                    <button type="submit" value="<c:out value="${element.id}"/>" name="denyRequest">Відмовити надання
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </c:forEach>
+</table>
 
 
 </body>

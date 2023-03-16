@@ -23,6 +23,10 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (Objects.nonNull(req.getParameter("registerButton"))) {
+            resp.sendRedirect(req.getContextPath() + "/register");
+        }
+
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/login.jsp");
         requestDispatcher.forward(req, resp);
     }
