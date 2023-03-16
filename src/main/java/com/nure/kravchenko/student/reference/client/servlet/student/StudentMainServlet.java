@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebServlet("/student/main")
+@WebServlet("/student")
 public class StudentMainServlet extends HttpServlet {
 
     @Override

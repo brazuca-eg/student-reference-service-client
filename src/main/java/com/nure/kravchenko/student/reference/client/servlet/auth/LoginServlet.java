@@ -60,14 +60,14 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("token", userLoggedInDto.getToken());
                     if (StringUtils.equalsIgnoreCase(Role.STUDENT.name(), role)) {
                         if (isApprovedAccount) {
-                            resp.sendRedirect(req.getContextPath() + "/student/main");
+                            resp.sendRedirect(req.getContextPath() + "/student");
                         }
                     } else if (StringUtils.equalsIgnoreCase(Role.WORKER.name(), role)) {
                         if (isApprovedAccount) {
-                            resp.sendRedirect(req.getContextPath() + "/worker/main");
+                            resp.sendRedirect(req.getContextPath() + "/worker");
                         }
                     } else if(StringUtils.equalsIgnoreCase(Role.ADMIN.name(), role)){
-                        resp.sendRedirect(req.getContextPath() + "/admin/main");
+                        resp.sendRedirect(req.getContextPath() + "/admin");
                     }
 
                     if (!isApprovedAccount) {

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebServlet("/worker/main")
+@WebServlet("/worker")
 public class WorkerMainServlet extends HttpServlet {
 
     @Override

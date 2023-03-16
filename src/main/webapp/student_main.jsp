@@ -1,43 +1,67 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!doctype html>
 
 <head>
-  <title>Waiting for approve</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Student Reference Service</title>
+
+    <jsp:include page="style.jsp"/>
 </head>
 
 <body>
-  <h2>Bio</h2>
+<!-- Spinner Start -->
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
 
-  <h4>Name</h4>
-  <h3><c:out value="${current.name}"/></h3>
+<jsp:include page="header.jsp"/>
 
-  <h4>Surname</h4>
-  <h3><c:out value="${current.surname}"/></h3>
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="text-center">
+            <h6 class="section-title bg-white text-center text-primary px-3">Студент</h6>
+            <h1 class="mb-5">Мій профіль</h1>
+        </div>
+        <div class="position-relative">
+            <div class="testimonial-item text-center">
+                <img class="border rounded-circle p-2 mx-auto mb-3" src="img/nure.png"
+                     style="width: 80px; height: 80px;">
+                <h5 class="mb-0">
+                    <c:out value="${current.name} ${current.surname} ${current.fatherhood}"/>
+                </h5>
+                <p>Пошта: <c:out value="${current.email}"/></p>
+                <p>Стать: <c:out value="${current.gender}"/></p>
+                <p>Група: <c:out value="${group.name}"/></p>
+                <p>Форма навчання: <c:out value="${group.learnForm}"/></p>
+                <p>Дата початку навчання: <c:out value="${group.startYear}"/></p>
+                <p>Дата закінчення навчання: <c:out value="${group.endYear}"/></p>
+            </div>
+        </div>
+    </div>
+</div>
 
-  <h4>Fatherhood</h4>
-  <h3><c:out value="${current.fatherhood}"/></h3>
+<jsp:include page="footer.jsp"/>
 
-  <h4>Email</h4>
-  <h3><c:out value="${current.email}"/></h3>
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-  <h2>My group</h2>
 
-  <h4>Group</h4>
-  <h3><c:out value="${group.name}"/></h3>
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-  <h4>Learning form</h4>
-  <h3><c:out value="${group.learnForm}"/></h3>
-
-  <h4>Start year</h4>
-  <h3><c:out value="${group.startYear}"/></h3>
-
-  <h4>End year</h4>
-  <h3><c:out value="${group.endYear}"/></h3>
-
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
 </body>
-
 
 </html>

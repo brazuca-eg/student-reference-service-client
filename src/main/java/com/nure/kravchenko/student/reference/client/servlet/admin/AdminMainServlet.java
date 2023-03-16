@@ -1,7 +1,6 @@
 package com.nure.kravchenko.student.reference.client.servlet.admin;
 
 import com.nure.kravchenko.student.reference.client.config.AppConfig;
-import com.nure.kravchenko.student.reference.client.server.FacultyDto;
 import com.nure.kravchenko.student.reference.client.server.WorkerDto;
 import com.nure.kravchenko.student.reference.client.service.AdminService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebServlet("/admin/main")
+@WebServlet("/admin")
 public class AdminMainServlet extends HttpServlet {
 
     @Override
