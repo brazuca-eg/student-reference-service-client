@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet("/admin/creation")
+@WebServlet("/adminCreation")
 public class CreationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -60,8 +60,8 @@ public class CreationServlet extends HttpServlet {
 
         if (Objects.nonNull(req.getParameter("createFacultyButton"))) {
             CreateFacultyDto createFacultyDto = CreateFacultyDto.builder()
-                    .shortName(req.getParameter("shortName"))
-                    .name(req.getParameter("name"))
+                    .shortName(req.getParameter("facultyShortName"))
+                    .name(req.getParameter("facultyName"))
                     .build();
 
             adminService.createFaculty(createFacultyDto, token);
@@ -89,7 +89,7 @@ public class CreationServlet extends HttpServlet {
                     .degreeForm(req.getParameter("groupDegreeForm"))
                     .startYear(LocalDate.parse(req.getParameter("groupEndYear")))
                     .endYear(LocalDate.parse(req.getParameter("groupEndYear")))
-                    .specialityId(Long.valueOf(req.getParameter("speciality")))
+                    .specialityId(Long.valueOf(req.getParameter("specialityForGroup")))
                     .build();
 
 
