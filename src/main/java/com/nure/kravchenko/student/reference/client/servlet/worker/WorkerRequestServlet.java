@@ -34,6 +34,17 @@ public class WorkerRequestServlet extends HttpServlet {
         List<WorkerRequestDto> waitingRequestDtos = workerService.getNonAssignedRequestsByWorkerFaculty(id, token);
         req.setAttribute("waitingRequests", waitingRequestDtos);
 
+        List<WorkerRequestDto> assignedRequests = workerService.getAssignedWorkerRequests(id, token);
+        req.setAttribute("assignedRequests", assignedRequests);
+
+        if (Objects.nonNull(req.getParameter("downloadReport"))) {
+            String s3FileName = req.getParameter("s3FileName");
+            req.getSession().setAttribute("s3FileName", s3FileName);
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/download");
+            dispatcher.forward(req, resp);
+        }
+
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/worker_requests.jsp");
         requestDispatcher.forward(req, resp);
     }

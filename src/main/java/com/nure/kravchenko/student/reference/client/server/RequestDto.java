@@ -19,6 +19,8 @@ public class RequestDto {
 
     private LocalDateTime endDate;
 
+    private String s3FileName;
+
     private String reasonName;
 
     private String reasonDescription;

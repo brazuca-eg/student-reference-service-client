@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!doctype html>
@@ -18,6 +18,7 @@
         <th>Дата закриття заявки</th>
         <th>Причина надання довідки</th>
         <th>Опис причини</th>
+        <th>Завантажити довідку</th>
     </tr>
     <c:forEach items="${requests}" var="element">
         <tr>
@@ -25,6 +26,22 @@
             <td><c:out value="${element.endDate}"/></td>
             <td><c:out value="${element.reasonName}"/></td>
             <td><c:out value="${element.reasonDescription}"/></td>
+            <td>
+                <c:choose>
+                    <c:when test="${element.s3FileName != null}">
+                        <form action="#" method="get">
+                            <input type="hidden" value="<c:out value="${element.s3FileName}"/>" name="s3FileName"
+                                   id="s3FileName"/>
+                            <button type="submit" value="<c:out value="${element.id}"/>" name="downloadReport">
+                                Завантажити
+                            </button>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <p>В процесі</p>
+                    </c:otherwise>
+                </c:choose>
+            </td>
         </tr>
     </c:forEach>
 </table>

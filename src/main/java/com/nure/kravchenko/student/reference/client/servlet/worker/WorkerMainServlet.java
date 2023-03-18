@@ -2,10 +2,7 @@ package com.nure.kravchenko.student.reference.client.servlet.worker;
 
 import com.nure.kravchenko.student.reference.client.config.AppConfig;
 import com.nure.kravchenko.student.reference.client.server.FacultyDto;
-import com.nure.kravchenko.student.reference.client.server.StudentDto;
-import com.nure.kravchenko.student.reference.client.server.StudentGroupDto;
 import com.nure.kravchenko.student.reference.client.server.WorkerDto;
-import com.nure.kravchenko.student.reference.client.service.StudentService;
 import com.nure.kravchenko.student.reference.client.service.WorkerService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

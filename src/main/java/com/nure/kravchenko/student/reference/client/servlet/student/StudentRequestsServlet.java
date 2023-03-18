@@ -42,6 +42,14 @@ public class StudentRequestsServlet extends HttpServlet {
         List<RequestDto> requests = studentService.getRequestForStudent(id, requestFilter, token);
         req.setAttribute("requests", requests);
 
+        if (Objects.nonNull(req.getParameter("downloadReport"))) {
+            String s3FileName = req.getParameter("s3FileName");
+            req.getSession().setAttribute("s3FileName", s3FileName);
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/download");
+            dispatcher.forward(req, resp);
+        }
+
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/student_requests.jsp");
         requestDispatcher.forward(req, resp);
     }

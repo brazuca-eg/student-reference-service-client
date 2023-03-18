@@ -3,6 +3,7 @@ package com.nure.kravchenko.student.reference.client.service;
 import com.nure.kravchenko.student.reference.client.Communication;
 import com.nure.kravchenko.student.reference.client.server.*;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -36,6 +37,16 @@ public class WorkerService {
         return responseEntity.getBody();
     }
 
+    public List<WorkerRequestDto> getAssignedWorkerRequests(Long id, String token) {
+        ResponseEntity<List<WorkerRequestDto>> responseEntity = communication.getRestTemplate()
+                .exchange(communication.getStudentReferenceRestUrl() + "/workers/" + id + "/requests/assigned",
+                        HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
+                        new ParameterizedTypeReference<List<WorkerRequestDto>>() {
+                        });
+
+        return responseEntity.getBody();
+    }
+
     public List<WorkerRequestDto> getNonAssignedRequestsByWorkerFaculty(Long id, String token) {
         ResponseEntity<List<WorkerRequestDto>> responseEntity = communication.getRestTemplate()
                 .exchange(communication.getStudentReferenceRestUrl() + "/workers/" + id + "/requests/nonAssigned",
@@ -52,6 +63,15 @@ public class WorkerService {
                                 "/requests/" + requestId + "?approve=" + approve,
                         HttpMethod.POST, createHttpEntityWithAuthorizationToken(token),
                         RequestDto.class);
+
+        return responseEntity.getBody();
+    }
+
+    public ByteArrayResource downloadReport( String fileName, String token) {
+        ResponseEntity<ByteArrayResource> responseEntity = communication.getRestTemplate()
+                .exchange(communication.getStudentReferenceRestUrl() + "/workers/requests/download/" + fileName,
+                        HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
+                        ByteArrayResource.class);
 
         return responseEntity.getBody();
     }
