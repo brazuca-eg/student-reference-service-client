@@ -57,10 +57,10 @@ public class WorkerService {
         return responseEntity.getBody();
     }
 
-    public RequestDto approveRequest(Long workerId, Long requestId, boolean approve, String token) {
+    public RequestDto approveRequest(Long workerId, Long requestId, boolean approve, String comment, String token) {
         ResponseEntity<RequestDto> responseEntity = communication.getRestTemplate()
                 .exchange(communication.getStudentReferenceRestUrl() + "/workers/" + workerId +
-                                "/requests/" + requestId + "?approve=" + approve,
+                                "/requests/" + requestId + "?approve=" + approve + "&comment=" + comment,
                         HttpMethod.POST, createHttpEntityWithAuthorizationToken(token),
                         RequestDto.class);
 

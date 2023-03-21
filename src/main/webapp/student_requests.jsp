@@ -10,63 +10,19 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp"/>
-<form action="#" method="get">
-    <button type="submit" class="btn btn-primary w-100 py-3" value="reasonNameFilter" name="reasonNameFilter">Filter by
-        reason name
-    </button>
+<jsp:include page="header_student.jsp"/>
+
+<h6 class="section-title bg-white text-center text-primary px-3">Сортувати</h6>
+<form method="get">
+    <div class="container">
+        <select name="requestReasonFilter" id="requestReasonFilter" class="form-select form-select-sm">
+                <option value="reasonNameFilter">Сортувати за причиною надання довідки</option>
+                <option value="startDateFilter">Сортувати за датою подання заявки</option>
+                <option value="endDateFilter">Сортувати за датою надання довідки</option>
+                <option value="endDateFilter">Сортувати за назвою групи</option>
+        </select>
+    </div>
 </form>
-
-<div class="container-xxl py-5">
-<div class="container">
-    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-        <h6 class="section-title bg-white text-center text-primary px-3">Створити нову заявку для замовлення довідки</h6>
-        <h1 class="mb-5"></h1>
-    </div>
-    <div class="row g-4">
-        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s"></div>
-        <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
-            <form action="#" method="post">
-                <div class="row g-3">
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="serialNumber" name="serialNumber"
-                                   placeholder="Серійний номер студентського квитка"/>
-                            <label for="serialNumber">Серійний номер студентського квитка</label>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="number" name="number"
-                                   placeholder="Номер студентського квитка"></p>
-                            <label for="number">Номер студентського квитка</label>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <select name="requestReason" id="requestReason" class="form-control">
-                                <c:forEach items="${reasons}" var="element">
-                                    <h3><c:out value="${element.name}"/></h3>
-                                    <option value="<c:out value="${element.name}"/>"><c:out
-                                            value="${element.name}"/></option>
-                                </c:forEach>
-                            </select>
-                            <label for="requestReason">Оберіть причину замовлення довідки</label>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <button class="btn btn-primary w-100 py-3" name="submitButton" type="submit" value="submit">
-                            Створити замовлення довідки
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-</div>
-
-<hr>
 
 <div class="container">
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">

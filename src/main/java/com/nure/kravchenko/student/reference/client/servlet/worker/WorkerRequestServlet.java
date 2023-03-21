@@ -3,6 +3,7 @@ package com.nure.kravchenko.student.reference.client.servlet.worker;
 import com.nure.kravchenko.student.reference.client.config.AppConfig;
 import com.nure.kravchenko.student.reference.client.server.WorkerRequestDto;
 import com.nure.kravchenko.student.reference.client.service.WorkerService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.RequestDispatcher;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet("/worker/requests")
+@WebServlet("/workerRequests")
 public class WorkerRequestServlet extends HttpServlet {
 
     @Override
@@ -62,10 +63,12 @@ public class WorkerRequestServlet extends HttpServlet {
 
         if (Objects.nonNull(req.getParameter("approveRequest"))) {
             Long requestId = Long.valueOf(req.getParameter("approveRequest"));
-            workerService.approveRequest(id, requestId, true, token);
+            workerService.approveRequest(id, requestId, true, StringUtils.EMPTY, token);
         }
-        if (Objects.nonNull(req.getParameter("denyRequest"))) {
-            Long requestId = Long.valueOf(req.getParameter("denyRequest"));
+        if (Objects.nonNull(req.getParameter("denyRequestButton"))) {
+            Long deniedRequestId = Long.valueOf(req.getParameter("deniedRequestId"));
+            String comment = req.getParameter("deniedComment");
+            workerService.approveRequest(id, deniedRequestId, false, comment, token);
         }
 
         doGet(req, resp);
