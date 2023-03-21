@@ -14,6 +14,7 @@
             <a href="<c:out value="${request.requestURL}workerRequests"/>" class="nav-item nav-link active">Запити</a>
             <a href="<c:out value="${request.requestURL}workerReports"/>" class="nav-item nav-link active">Надані довідки</a>
             <a href="<c:out value="${request.requestURL}workerDeniedReports"/>" class="nav-item nav-link active">Відмовленні запити</a>
+            <a href="<c:out value="${request.requestURL}searchRequest"/>" class="nav-item nav-link active">Пошук довідок</a>
             <a href="" class="nav-item nav-link">Вийти</a>
         </div>
     </div>
