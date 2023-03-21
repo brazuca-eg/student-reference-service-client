@@ -62,42 +62,6 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-        <h6 class="section-title bg-white text-center text-primary px-3">Надані довідки</h6>
-        <h1 class="mb-5"></h1>
-        <table class="table">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">Дата подання заявки</th>
-                <th scope="col">Причина надання довідки</th>
-                <th scope="col">Опис причини надання</th>
-                <th scope="col">Студент</th>
-                <th scope="col">Група</th>
-                <th scope="col">Завантажити довідку</th>
-            </tr>
-            </thead>
-            <c:forEach items="${assignedRequests}" var="element">
-                <tbody>
-                <tr>
-                    <td><c:out value="${element.startDate}"/></td>
-                    <td><c:out value="${element.reasonName}"/></td>
-                    <td><c:out value="${element.reasonDescription}"/></td>
-                    <td><c:out value="${element.studentFullName}"/></td>
-                    <td><c:out value="${element.groupName}"/></td>
-                    <td>
-                        <form action="#" method="get">
-                            <input type="hidden" value="<c:out value="${element.s3FileName}"/>" name="s3FileName" id="s3FileName"/>
-                            <button type="submit" class="btn btn-primary btn-sm" value="<c:out value="${element.id}"/>" name="downloadReport">Завантажити</button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </c:forEach>
-        </table>
-    </div>
-</div>
-
 <jsp:include page="footer.jsp"/>
 
 <!-- Back to Top -->

@@ -21,7 +21,7 @@ public class WorkerService {
         this.communication = communication;
     }
 
-    public WorkerDto getWorkerById(Long id, String token){
+    public WorkerDto getWorkerById(Long id, String token) {
         ResponseEntity<WorkerDto> responseEntity = communication.getRestTemplate()
                 .exchange(communication.getStudentReferenceRestUrl() + "/workers/" + id,
                         HttpMethod.GET, createHttpEntityWithAuthorizationToken(token), WorkerDto.class);
@@ -37,9 +37,10 @@ public class WorkerService {
         return responseEntity.getBody();
     }
 
-    public List<WorkerRequestDto> getAssignedWorkerRequests(Long id, String token) {
+    public List<WorkerRequestDto> getAssignedWorkerRequests(Long id, boolean approved, String token) {
         ResponseEntity<List<WorkerRequestDto>> responseEntity = communication.getRestTemplate()
-                .exchange(communication.getStudentReferenceRestUrl() + "/workers/" + id + "/requests/assigned",
+                .exchange(communication.getStudentReferenceRestUrl() + "/workers/" + id + "/requests/assigned" +
+                                "?approved=" + approved,
                         HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
                         new ParameterizedTypeReference<List<WorkerRequestDto>>() {
                         });
@@ -67,7 +68,7 @@ public class WorkerService {
         return responseEntity.getBody();
     }
 
-    public ByteArrayResource downloadReport( String fileName, String token) {
+    public ByteArrayResource downloadReport(String fileName, String token) {
         ResponseEntity<ByteArrayResource> responseEntity = communication.getRestTemplate()
                 .exchange(communication.getStudentReferenceRestUrl() + "/workers/requests/download/" + fileName,
                         HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
@@ -76,7 +77,7 @@ public class WorkerService {
         return responseEntity.getBody();
     }
 
-    private HttpEntity<String> createHttpEntityWithAuthorizationToken(String token){
+    private HttpEntity<String> createHttpEntityWithAuthorizationToken(String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", token);
         return new HttpEntity<>(headers);
