@@ -17,8 +17,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/studentRequests")
-public class StudentRequestsServlet extends HttpServlet {
+@WebServlet("/studentDeniedRequests")
+public class StudentDeniedRequestsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -30,11 +30,11 @@ public class StudentRequestsServlet extends HttpServlet {
         StudentService studentService = annotationConfigApplicationContext
                 .getBean("studentService", StudentService.class);
 
-        List<RequestDto> studentRequests = studentService
-                .getRequestForStudent(id, RequestType.NEW, StringUtils.EMPTY, token);
-        req.setAttribute("studentRequests", studentRequests);
+        List<RequestDto> studentDeniedRequests = studentService
+                .getRequestForStudent(id, RequestType.DENIED, StringUtils.EMPTY, token);
+        req.setAttribute("studentDeniedRequests", studentDeniedRequests);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/student_requests.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/student_denied_requests.jsp");
         requestDispatcher.forward(req, resp);
     }
 }

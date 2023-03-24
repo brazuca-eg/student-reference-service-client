@@ -4,7 +4,6 @@ import com.nure.kravchenko.student.reference.client.config.AppConfig;
 import com.nure.kravchenko.student.reference.client.server.RequestDto;
 import com.nure.kravchenko.student.reference.client.server.RequestType;
 import com.nure.kravchenko.student.reference.client.service.StudentService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.RequestDispatcher;
@@ -16,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
-@WebServlet("/studentRequests")
-public class StudentRequestsServlet extends HttpServlet {
+@WebServlet("/studentReports")
+public class StudentReportsServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -30,11 +31,23 @@ public class StudentRequestsServlet extends HttpServlet {
         StudentService studentService = annotationConfigApplicationContext
                 .getBean("studentService", StudentService.class);
 
-        List<RequestDto> studentRequests = studentService
-                .getRequestForStudent(id, RequestType.NEW, StringUtils.EMPTY, token);
-        req.setAttribute("studentRequests", studentRequests);
+        String requestFilter = null;
+        if (Objects.nonNull(req.getParameter("reasonNameFilter"))) {
+            requestFilter = "reasonName";
+        }
+        List<RequestDto> requests = studentService.getRequestForStudent(id, RequestType.APPROVED, requestFilter, token);
+        req.setAttribute("requests", requests);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/student_requests.jsp");
+        if (Objects.nonNull(req.getParameter("downloadReport"))) {
+            String s3FileName = req.getParameter("s3FileName");
+            req.getSession().setAttribute("s3FileName", s3FileName);
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/download");
+            dispatcher.forward(req, resp);
+        }
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/student_reports.jsp");
         requestDispatcher.forward(req, resp);
     }
+
 }

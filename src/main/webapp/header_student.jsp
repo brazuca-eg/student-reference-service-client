@@ -11,7 +11,9 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav ms-auto p-4 p-lg-0">
       <a href="<c:out value="${request.requestURL}student"/>" class="nav-item nav-link active">Профіль</a>
-      <a href="<c:out value="${request.requestURL}studentRequests"/>" class="nav-item nav-link active">Запити та довідки</a>
+      <a href="<c:out value="${request.requestURL}studentReports"/>" class="nav-item nav-link active">Надані довідки</a>
+      <a href="<c:out value="${request.requestURL}studentRequests"/>" class="nav-item nav-link active">Заявки</a>
+      <a href="<c:out value="${request.requestURL}studentDeniedRequests"/>" class="nav-item nav-link active">Відмовлені заявки</a>
       <a href="<c:out value="${request.requestURL}createRequest"/>" class="nav-item nav-link active">Створити запит</a>
       <a href="" class="nav-item nav-link">Вийти</a>
     </div>

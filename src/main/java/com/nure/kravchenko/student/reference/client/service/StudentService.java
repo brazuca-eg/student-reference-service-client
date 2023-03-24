@@ -2,10 +2,7 @@ package com.nure.kravchenko.student.reference.client.service;
 
 import com.nure.kravchenko.student.reference.client.Communication;
 import com.nure.kravchenko.student.reference.client.payload.CreateRequestDto;
-import com.nure.kravchenko.student.reference.client.server.ReasonDto;
-import com.nure.kravchenko.student.reference.client.server.RequestDto;
-import com.nure.kravchenko.student.reference.client.server.StudentDto;
-import com.nure.kravchenko.student.reference.client.server.StudentGroupDto;
+import com.nure.kravchenko.student.reference.client.server.*;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -32,7 +29,7 @@ public class StudentService {
         return responseEntity.getBody();
     }
 
-    public StudentGroupDto getGroupByStudent(Long id, String token){
+    public StudentGroupDto getGroupByStudent(Long id, String token) {
         ResponseEntity<StudentGroupDto> responseEntity = communication.getRestTemplate()
                 .exchange(communication.getStudentReferenceRestUrl() + "/students/" + id + "/group",
                         HttpMethod.GET, createHttpEntityWithAuthorizationToken(token), StudentGroupDto.class);
@@ -50,7 +47,7 @@ public class StudentService {
         return responseEntity.getBody();
     }
 
-    public RequestDto createRequest(Long id, CreateRequestDto createRequestDto,  String token){
+    public RequestDto createRequest(Long id, CreateRequestDto createRequestDto, String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", token);
         HttpEntity<CreateRequestDto> createRequestDtoHttpEntity = new HttpEntity<>(createRequestDto, headers);
@@ -63,9 +60,10 @@ public class StudentService {
         return responseEntity.getBody();
     }
 
-    public List<RequestDto> getRequestForStudent(Long id, String filter, String token) {
+    public List<RequestDto> getRequestForStudent(Long id, RequestType requestType, String filter, String token) {
         ResponseEntity<List<RequestDto>> responseEntity = communication.getRestTemplate()
-                .exchange(communication.getStudentReferenceRestUrl() + "/students/" + id + "/requests?filter=" + filter,
+                .exchange(communication.getStudentReferenceRestUrl() + "/students/" + id + "/requests?" +
+                                "requestType=" + requestType + "&" + "filter=" + filter,
                         HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
                         new ParameterizedTypeReference<List<RequestDto>>() {
                         });
@@ -73,7 +71,7 @@ public class StudentService {
         return responseEntity.getBody();
     }
 
-    private HttpEntity<String> createHttpEntityWithAuthorizationToken(String token){
+    private HttpEntity<String> createHttpEntityWithAuthorizationToken(String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", token);
         return new HttpEntity<>(headers);

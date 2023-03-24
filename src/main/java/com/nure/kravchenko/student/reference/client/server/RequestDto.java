@@ -25,4 +25,8 @@ public class RequestDto {
 
     private String reasonDescription;
 
+    private boolean approved;
+
+    private String comment;
+
 }
