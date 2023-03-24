@@ -27,17 +27,21 @@
         <th scope="col">Студент</th>
         <th scope="col">Група</th>
         <th scope="col">Причина відмови</th>
+        <th scope="col">Дата відмови</th>
       </tr>
       </thead>
       <c:forEach items="${assignedDeniedReports}" var="element">
         <tbody>
         <tr>
-          <td><c:out value="${element.startDate}"/></td>
+          <fmt:parseDate value="${element.startDate}"  pattern="yyyy-MM-dd'T'HH:mm" var="parsedStartDate" type="both" />
+          <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${parsedStartDate}" /></td>
           <td><c:out value="${element.reasonName}"/></td>
           <td><c:out value="${element.reasonDescription}"/></td>
           <td><c:out value="${element.studentFullName}"/></td>
           <td><c:out value="${element.groupName}"/></td>
           <td><c:out value="${element.comment}"/></td>
+          <fmt:parseDate value="${element.endDate}"  pattern="yyyy-MM-dd'T'HH:mm" var="parsedEndDate" type="both" />
+          <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${parsedEndDate}" /></td>
         </tr>
         </tbody>
       </c:forEach>

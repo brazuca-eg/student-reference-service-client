@@ -41,8 +41,10 @@
             <c:forEach items="${requests}" var="element">
                 <tbody>
                 <tr>
-                    <td><c:out value="${element.startDate}"/></td>
-                    <td><c:out value="${element.endDate}"/></td>
+                    <fmt:parseDate value="${element.startDate}"  pattern="yyyy-MM-dd'T'HH:mm" var="parsedStartDate" type="both" />
+                    <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${parsedStartDate}" /></td>
+                    <fmt:parseDate value="${element.endDate}"  pattern="yyyy-MM-dd'T'HH:mm" var="parsedEndDate" type="both" />
+                    <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${parsedEndDate}" /></td>
                     <td><c:out value="${element.reasonName}"/></td>
                     <td><c:out value="${element.reasonDescription}"/></td>
                     <td>
