@@ -5,6 +5,7 @@ import com.nure.kravchenko.student.reference.client.payload.LoginDto;
 import com.nure.kravchenko.student.reference.client.payload.RegistrationDto;
 import com.nure.kravchenko.student.reference.client.server.UserLoggedInDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -33,4 +34,9 @@ public class AuthService {
         return responseEntity.getBody();
     }
 
+    public void logout() {
+        communication.getRestTemplate()
+                .exchange(communication.getStudentReferenceRestUrl() + "/auth/logout",
+                        HttpMethod.POST, null, Void.class);
+    }
 }
