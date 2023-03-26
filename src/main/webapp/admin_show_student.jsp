@@ -7,45 +7,115 @@
 <head>
     <title>See Student</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <jsp:include page="style_inherit.jsp"/>
 </head>
 
 <body>
-<h2>Bio</h2>
 
-<h4>Name</h4>
-<h3><c:out value="${student.name}"/></h3>
+<jsp:include page="header_admin.jsp"/>
 
-<h4>Surname</h4>
-<h3><c:out value="${student.surname}"/></h3>
 
-<h4>Fatherhood</h4>
-<h3><c:out value="${student.fatherhood}"/></h3>
+<div class="container-xxl py-5" align="center">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <h6 class="section-title bg-white text-start text-primary pe-3">Перегляд студента</h6>
+                <div class="row gy-2 gx-4 mb-4">
+                    <p>Ім'я</p>
+                    <p><c:out value="${student.name}"/></p>
 
-<h4>Email</h4>
-<h3><c:out value="${student.email}"/></h3>
+                    <p>Прізвище:</p>
+                    <p><c:out value="${student.surname}"/></p>
 
-<h4>Gender</h4>
-<h3><c:out value="${student.gender}"/></h3>
+                    <p>По батькові:</p>
+                    <p><c:out value="${student.fatherhood}"/></p>
 
-<c:choose>
-    <c:when test="${student.approved == false}">
-        <form action="#" method="post">
-            <input type="hidden" value="<c:out value="${student.id}"/>" name="studentId"/>
-            <input type="text" id="groupName" name="groupName" placeholder="Enter the group name"/>
-            <input type="text" id="serialNumber" name="serialNumber" placeholder="Enter the ticket serial number"/>
-            <input type="text" id="number" name="number" placeholder="Enter the ticket number"/>
-            <label for="startDate">Ticket start date:</label>
-            <input type="date" id="startDate" name="startDate">
-            <label for="endDate">Ticket end date:</label>
-            <input type="date" id="endDate" name="endDate">
+                    <p>Email:</p>
+                    <p><c:out value="${student.email}"/></p>
 
-            <button type="submit" value="submit" name="approveStudentButton">Approve</button>
-        </form>
-    </c:when>
-    <c:otherwise>
+                    <p>Стать:</p>
+                    <p><c:out value="${student.gender}"/></p>
 
-    </c:otherwise>
-</c:choose>
+
+                    <c:choose>
+                        <c:when test="${student.approved == false}">
+                            <form method="post">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <select name="studentGroup" id="studentGroup" class="form-control">
+                                            <c:forEach items="${studentGroups}" var="element">
+                                                <h3><c:out value="${element.name}"/></h3>
+                                                <option value="<c:out value="${element.name}"/>"><c:out
+                                                        value="${element.name}"/></option>
+                                            </c:forEach>
+                                        </select>
+                                        <label for="studentGroup">Оберіть групу студента</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="serialNumber" name="serialNumber"
+                                               placeholder="Введіть серійний номер квитка">
+                                        <label for="serialNumber">Серійний номер квитка</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="number" name="number"
+                                               placeholder="Введіть номер квитка">
+                                        <label for="number">Номер квитка</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control" id="startDate" name="startDate"
+                                               placeholder="Введіть початкову дату дії квитка">
+                                        <label for="startDate">Початкова дата дії квитка</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control" id="endDate" name="endDate"
+                                               placeholder="Введіть кінцеву дату дії квитка">
+                                        <label for="endDate">Кінцева дата дії квитка</label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" value="submit" class="btn btn-primary btn-sm"
+                                        name="approveStudentButton">
+                                    Підтвердити реєстрацію
+                                </button>
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                            <h2>Профіль підтверджено</h2>
+                        </c:otherwise>
+                    </c:choose>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<jsp:include page="footer.jsp"/>
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
 
 </body>
 

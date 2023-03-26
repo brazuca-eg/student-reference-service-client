@@ -51,7 +51,7 @@
                                    type="both"/>
                     <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${parsedEndDate}"/></td>
                     <td>
-                        <form action="#" method="get">
+                        <form method="get">
                             <input type="hidden" value="<c:out value="${element.s3FileName}"/>"
                                    name="s3FileName" id="s3FileName"/>
                             <button type="submit" class="btn btn-primary w-100 py-3"

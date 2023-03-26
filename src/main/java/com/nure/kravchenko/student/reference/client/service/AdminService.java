@@ -1,10 +1,7 @@
 package com.nure.kravchenko.student.reference.client.service;
 
 import com.nure.kravchenko.student.reference.client.Communication;
-import com.nure.kravchenko.student.reference.client.payload.ApproveWorkerDto;
-import com.nure.kravchenko.student.reference.client.payload.CreateFacultyDto;
-import com.nure.kravchenko.student.reference.client.payload.CreateGroupDto;
-import com.nure.kravchenko.student.reference.client.payload.CreateSpecialityDto;
+import com.nure.kravchenko.student.reference.client.payload.*;
 import com.nure.kravchenko.student.reference.client.server.*;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -71,6 +68,17 @@ public class AdminService {
         return responseEntity.getBody();
     }
 
+    public List<StudentGroupDto> getAllGroups(String token) {
+        ResponseEntity<List<StudentGroupDto>> responseEntity = communication.getRestTemplate()
+                .exchange(communication.getStudentReferenceRestUrl() + "/admins/groups",
+                        HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
+                        new ParameterizedTypeReference<List<StudentGroupDto>>() {
+                        });
+
+        return responseEntity.getBody();
+    }
+
+
     public List<SpecialityDto> getAllSpecialities(String token) {
         ResponseEntity<List<SpecialityDto>> responseEntity = communication.getRestTemplate()
                 .exchange(communication.getStudentReferenceRestUrl() + "/admins/specialities",
@@ -94,7 +102,21 @@ public class AdminService {
         return responseEntity.getBody();
     }
 
-    public FacultyDto createFaculty(CreateFacultyDto createFacultyDto, String token){
+    public StudentDto approveStudentRegistration(Long id, ApproveStudentRegisterDto approveStudentRegisterDto, String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", token);
+        HttpEntity<ApproveStudentRegisterDto> approveWorkerDtoHttpEntity =
+                new HttpEntity<>(approveStudentRegisterDto, headers);
+
+        ResponseEntity<StudentDto> responseEntity = communication.getRestTemplate()
+                .postForEntity(communication.getStudentReferenceRestUrl() + "/admins/students/" + id + "/approve",
+                        approveWorkerDtoHttpEntity,
+                        StudentDto.class);
+
+        return responseEntity.getBody();
+    }
+
+    public FacultyDto createFaculty(CreateFacultyDto createFacultyDto, String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", token);
         HttpEntity<CreateFacultyDto> createFacultyDtoHttpEntity = new HttpEntity<>(createFacultyDto, headers);
@@ -107,7 +129,7 @@ public class AdminService {
         return responseEntity.getBody();
     }
 
-    public SpecialityDto createSpeciality(CreateSpecialityDto createSpecialityDto, String token){
+    public SpecialityDto createSpeciality(CreateSpecialityDto createSpecialityDto, String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", token);
         HttpEntity<CreateSpecialityDto> createSpecialityDtoHttpEntity = new HttpEntity<>(createSpecialityDto, headers);
@@ -120,7 +142,7 @@ public class AdminService {
         return responseEntity.getBody();
     }
 
-    public StudentGroupDto createGroup(CreateGroupDto createGroupDto, String token){
+    public StudentGroupDto createGroup(CreateGroupDto createGroupDto, String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", token);
         HttpEntity<CreateGroupDto> createSpecialityDtoHttpEntity = new HttpEntity<>(createGroupDto, headers);
