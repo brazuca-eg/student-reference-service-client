@@ -22,7 +22,7 @@
       <thead class="thead-light">
       <tr>
         <th scope="col">Дата подання заявки</th>
-        <th scope="col">Причина надання довідки</th>
+        <th scope="col">Місце для подання довідки</th>
         <th scope="col">Опис причини надання</th>
         <th scope="col">Студент</th>
         <th scope="col">Група</th>
@@ -42,7 +42,7 @@
           <fmt:parseDate value="${element.endDate}"  pattern="yyyy-MM-dd'T'HH:mm" var="parsedEndDate" type="both" />
           <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${parsedEndDate}" /></td>
           <td>
-            <form action="#" method="get">
+            <form method="get">
               <input type="hidden" value="<c:out value="${element.s3FileName}"/>" name="s3FileName" id="s3FileName"/>
               <button type="submit" class="btn btn-primary btn-sm" value="<c:out value="${element.id}"/>" name="downloadReport">Завантажити</button>
             </form>

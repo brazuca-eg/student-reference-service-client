@@ -22,7 +22,7 @@
       <thead class="thead-light">
       <tr>
         <th scope="col">Дата подання заявки</th>
-        <th scope="col">Причина надання довідки</th>
+        <th scope="col">Місце для подання довідки</th>
         <th scope="col">Опис причини надання</th>
         <th scope="col">Студент</th>
         <th scope="col">Група</th>

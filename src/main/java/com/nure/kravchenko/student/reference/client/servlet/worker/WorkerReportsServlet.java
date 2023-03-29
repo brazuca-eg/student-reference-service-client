@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @WebServlet("/workerReports")
 public class WorkerReportsServlet extends HttpServlet {
@@ -30,6 +31,14 @@ public class WorkerReportsServlet extends HttpServlet {
 
         List<WorkerRequestDto> assignedReports = workerService.getAssignedWorkerRequests(id, true, token);
         req.setAttribute("assignedReports", assignedReports);
+
+        if (Objects.nonNull(req.getParameter("downloadReport"))) {
+            String s3FileName = req.getParameter("s3FileName");
+            req.getSession().setAttribute("s3FileName", s3FileName);
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/download");
+            dispatcher.forward(req, resp);
+        }
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/worker_reports.jsp");
         requestDispatcher.forward(req, resp);

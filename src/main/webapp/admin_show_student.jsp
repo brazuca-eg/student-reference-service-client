@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                <h6 class="section-title bg-white text-start text-primary pe-3">Перегляд студента</h6>
+                <h6 class="section-title bg-white text-start text-primary pe-3">Перегляд здобувача вищої освіти</h6>
                 <div class="row gy-2 gx-4 mb-4">
                     <p>Ім'я</p>
                     <p><c:out value="${student.name}"/></p>

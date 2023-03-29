@@ -20,7 +20,6 @@ public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        String token = (String) session.getAttribute("token");
 
         AnnotationConfigApplicationContext annotationConfigApplicationContext =
                 new AnnotationConfigApplicationContext(AppConfig.class);

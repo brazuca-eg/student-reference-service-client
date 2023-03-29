@@ -19,13 +19,13 @@
 
 <div class="container">
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-        <h6 class="section-title bg-white text-center text-primary px-3">Заявки на надання довідок від студентів</h6>
+        <h6 class="section-title bg-white text-center text-primary px-3">Заявки на надання довідок від здобувачів вищої освіти</h6>
         <h1 class="mb-5"></h1>
         <table class="table">
             <thead class="thead-light">
             <tr>
                 <th scope="col">Дата подання заявки</th>
-                <th scope="col">Причина надання довідки</th>
+                <th scope="col">Місце для подання довідки</th>
                 <th scope="col">Опис причини надання</th>
                 <th scope="col">Студент</th>
                 <th scope="col">Група</th>

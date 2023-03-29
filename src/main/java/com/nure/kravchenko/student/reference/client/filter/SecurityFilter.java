@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Objects;
 
 @Log4j
 @WebFilter(filterName = "security")
@@ -35,6 +36,8 @@ public class SecurityFilter implements Filter {
             if (!currentUrl.contains("login") && !currentUrl.contains("register")) {
                 servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);
             }
+        } else if (Objects.isNull(role) && currentUrl.contains("logout")) {
+            servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);
         } else if (role.equalsIgnoreCase(Role.STUDENT.name())) {
             if (StringUtils.containsIgnoreCase(currentUrl, Role.WORKER.name()) ||
                     StringUtils.containsIgnoreCase(currentUrl, Role.ADMIN.name())) {

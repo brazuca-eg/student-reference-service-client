@@ -40,7 +40,13 @@
           <form  method="post">
             <input type="hidden" value="<c:out value="${element.id}"/>" name="workerId" />
             <td>
-              <input type="text" class="form-control border-3 w-75 p-3" id="jobTitle" name="jobTitle" placeholder="Встановіть робочу спеціальність робітнику"/>
+              <select name="jobTitle" id="jobTitle" class="form-control">
+                <option value="Інженер деканату">Інженер деканату</option>
+                <option value="Диспетчер">Диспетчер</option>
+                <option value="Старший диспетчер">Старший диспетчер</option>
+                <option value="Друкар-машиністка">Друкар-машиністка</option>
+                <option value="Заступник декана">Заступник декана</option>
+              </select>
             </td>
             <td>
               <select name="faculty" id="faculty" class="form-control">
