@@ -80,6 +80,12 @@
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
+                                <input type="text" class="form-control" id="educationalProgram" name="educationalProgram" placeholder="Введіть назву освітньої програми">
+                                <label for="educationalProgram">Освітня програма</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
                                 <select name="faculty" id="faculty" class="form-control">
                                     <c:forEach items="${faculties}" var="element">
                                         <h3><c:out value="${element.name}"/></h3>
@@ -154,7 +160,7 @@
                                 <select name="specialityForGroup" id="specialityForGroup" class="form-control">
                                     <c:forEach items="${specialities}" var="element">
                                         <h3><c:out value="${element.name}"/></h3>
-                                        <option value="<c:out value="${element.id}"/>"><c:out value="${element.name}"/></option>
+                                        <option value="<c:out value="${element.id}"/>"><c:out value="${element.number}"/> <c:out value="${element.name}"/> - <c:out value="${element.educationalProgram}"/></option>
                                     </c:forEach>
                                 </select>
                                 <label for="specialityForGroup">Оберіть спеціальність групи</label>

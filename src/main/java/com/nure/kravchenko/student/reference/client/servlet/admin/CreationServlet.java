@@ -26,7 +26,6 @@ public class CreationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Long id = (Long) session.getAttribute("userId");
         String token = (String) session.getAttribute("token");
 
 
@@ -50,7 +49,6 @@ public class CreationServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         HttpSession session = req.getSession();
-        Long id = (Long) session.getAttribute("userId");
         String token = (String) session.getAttribute("token");
 
         AnnotationConfigApplicationContext annotationConfigApplicationContext =
@@ -74,6 +72,7 @@ public class CreationServlet extends HttpServlet {
                     .number(Integer.valueOf(req.getParameter("specialityNumber")))
                     .name(req.getParameter("specialityName"))
                     .shortName(req.getParameter("specialityShortName"))
+                    .educationalProgram(req.getParameter("educationalProgram"))
                     .facultyId(Long.valueOf(req.getParameter("faculty")))
                     .build();
 

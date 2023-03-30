@@ -36,7 +36,8 @@
             <c:forEach items="${waitingRequests}" var="element">
                 <tbody>
                 <tr>
-                    <td><c:out value="${element.startDate}"/></td>
+                    <fmt:parseDate value="${element.startDate}"  pattern="yyyy-MM-dd'T'HH:mm" var="parsedStartDate" type="both" />
+                    <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${parsedStartDate}" /></td>
                     <td><c:out value="${element.reasonName}"/></td>
                     <td><c:out value="${element.reasonDescription}"/></td>
                     <td><c:out value="${element.studentFullName}"/></td>
