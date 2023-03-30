@@ -5,7 +5,7 @@
 <!doctype html>
 
 <head>
-    <title>Student Reference Service</title>
+    <title>Сторінка входу</title>
 
     <jsp:include page="style.jsp" />
 </head>
@@ -22,7 +22,6 @@
 
 <jsp:include page="header.jsp"/>
 
-<!-- About Start -->
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-5">
@@ -58,12 +57,12 @@
                     </div>
                 </div>
                 <div class="row gy-2 gx-4 mb-4">
-                    <form action="#" method="post">
+                    <form method="post">
                         Email
-                        <input type="text" id="email" name="email" class="form-control border-3 w-75 p-3"
+                        <input type="text" id="email" name="email" required oninvalid="this.setCustomValidity('Email повинен бути заповненим')" class="form-control border-3 w-75 p-3"
                                placeholder="Введіть вашу пошту">
                         Пароль
-                        <input type="password" id="password" name="password" class="form-control border-3 w-75 p-3"
+                        <input type="password" id="password" name="password" required oninvalid="this.setCustomValidity('Пароль повинен бути заповненим')" class="form-control border-3 w-75 p-3"
                                placeholder="Введіть ваш пароль">
 
                         <button type="submit" value="submit" name="submitButton" class="btn btn-primary py-3 px-5 mt-2">
@@ -78,7 +77,8 @@
         </div>
     </div>
 </div>
-<!-- About End -->
+
+<p align="center" style="color:red;"><c:out value='${requestScope["errorResponse"]}'/></p>
 
 <jsp:include page="footer.jsp"/>
 

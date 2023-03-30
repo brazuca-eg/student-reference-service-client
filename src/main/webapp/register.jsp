@@ -5,7 +5,7 @@
 <!doctype html>
 
 <head>
-    <title>Student Reference Service</title>
+    <title>Реєстрація</title>
 
     <jsp:include page="style.jsp"/>
 </head>
@@ -24,7 +24,6 @@
 <jsp:include page="header.jsp"/>
 
 
-<!-- About Start -->
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-5">
@@ -40,22 +39,22 @@
                     <form action="#" method="post">
                         Email
                         <input type="text" id="email" name="email" class="form-control border-3 w-75 p-3"
-                               placeholder="Введіть вашу пошту">
+                               placeholder="Введіть вашу пошту" required oninvalid="this.setCustomValidity('Email повинен бути заповненим')">
                         Пароль
                         <input type="password" id="password" name="password" class="form-control border-3 w-75 p-3"
-                               placeholder="Введіть пароль">
+                               placeholder="Введіть пароль" required oninvalid="this.setCustomValidity('Пароль повинен бути заповненим')">
                         Повторіть пароль
                         <input type="password" id="password2" name="password2" class="form-control border-3 w-75 p-3"
-                               placeholder="Повторіть пароль">
+                               placeholder="Повторіть пароль" placeholder="Введіть пароль" required oninvalid="this.setCustomValidity('Пароль повинен бути заповненим')">
                         Ім'я
                         <input type="text" id="name" name="name" class="form-control border-3 w-75 p-3"
-                               placeholder="Введіть ім'я">
+                               placeholder="Введіть ім'я" placeholder="Введіть пароль" required oninvalid="this.setCustomValidity('Ім\'я повинно бути заповненим')">
                         Прізвище
                         <input type="text" id="surname" name="surname" class="form-control border-3 w-75 p-3"
-                               placeholder="Введіть прізвище">
+                               placeholder="Введіть прізвище" required oninvalid="this.setCustomValidity('Прізвище повинно бути заповненим')">
                         Ім'я по батькові
                         <input type="text" id="fatherhood" name="fatherhood" class="form-control border-3 w-75 p-3"
-                               placeholder="Введіть ім'я по батькові">
+                               placeholder="Введіть ім'я по батькові"  required oninvalid="this.setCustomValidity('Ім\'я по батькові повинно бути заповненим')">
                         <p>Оберіть вашу стать</p>
                         <input type="radio" id="gender_m" name="gender" value="Male">
                         <label for="gender_m">Чоловік</label><br>
@@ -79,7 +78,8 @@
         </div>
     </div>
 </div>
-<!-- About End -->
+
+<p align="center" style="color:red;"><c:out value='${requestScope["errorResponse"]}'/></p>
 
 
 <jsp:include page="footer.jsp"/>
