@@ -1,10 +1,8 @@
 package com.nure.kravchenko.student.reference.client.servlet.auth;
 
-
-import com.nure.kravchenko.student.reference.client.config.AppConfig;
 import com.nure.kravchenko.student.reference.client.service.AuthService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,18 +14,22 @@ import java.io.IOException;
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 
+    private static final long serialVersionUID = -3149824078466009445L;
+
+    private AuthService authService;
+
+    @Override
+    public void init() {
+        ServletContext ctx = getServletContext();
+        this.authService = (AuthService) ctx.getAttribute("authService");
+    }
+
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-
-        AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                new AnnotationConfigApplicationContext(AppConfig.class);
-        AuthService authService = annotationConfigApplicationContext
-                .getBean("authService", AuthService.class);
-
         authService.logout();
 
+        HttpSession session = request.getSession();
         session.removeAttribute("role");
         session.removeAttribute("userId");
         session.removeAttribute("token");

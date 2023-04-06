@@ -45,15 +45,6 @@ public class AppExceptionHandler extends HttpServlet {
             userMsg = errorResponse.getErrorDescription();
         }
 
-        if (statusCode == 404) {
-            request.setAttribute("errorResponse", userMsg);
-
-            if (previousPath.substring(slashIndex).equals("/login")) {
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
-                requestDispatcher.forward(request, response);
-            }
-        }
-
         if (statusCode == 400) {
             request.setAttribute("errorResponse", userMsg);
 
@@ -71,6 +62,23 @@ public class AppExceptionHandler extends HttpServlet {
             request.setAttribute("exc", throwable.getMessage());
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/error.jsp");
             requestDispatcher.forward(request, response);
+        }
+
+        if (statusCode == 404) {
+            request.setAttribute("errorResponse", userMsg);
+
+            if (previousPath.substring(slashIndex).equals("/login")) {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+                requestDispatcher.forward(request, response);
+            }
+        }
+
+        if (statusCode == 405) {
+            request.setAttribute("errorResponse", userMsg);
+
+            if (previousPath.substring(slashIndex).equals("/createRequest")) {
+                request.getRequestDispatcher("/student_create_request.jsp").forward(request, response);
+            }
         }
     }
 

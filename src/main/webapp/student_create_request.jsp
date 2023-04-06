@@ -65,6 +65,8 @@
 
 <h3><c:out value='${requestScope["response"]}'/></h3>
 
+<p align="center" style="color:red;"><c:out value='${requestScope["errorResponse"]}'/></p>
+
 
 <jsp:include page="footer.jsp"/>
 

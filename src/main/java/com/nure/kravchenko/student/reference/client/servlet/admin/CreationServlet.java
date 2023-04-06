@@ -1,15 +1,14 @@
 package com.nure.kravchenko.student.reference.client.servlet.admin;
 
-import com.nure.kravchenko.student.reference.client.config.AppConfig;
 import com.nure.kravchenko.student.reference.client.payload.CreateFacultyDto;
 import com.nure.kravchenko.student.reference.client.payload.CreateGroupDto;
 import com.nure.kravchenko.student.reference.client.payload.CreateSpecialityDto;
 import com.nure.kravchenko.student.reference.client.server.FacultyDto;
 import com.nure.kravchenko.student.reference.client.server.SpecialityDto;
 import com.nure.kravchenko.student.reference.client.service.AdminService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,16 +22,21 @@ import java.util.Objects;
 
 @WebServlet("/adminCreation")
 public class CreationServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 6436614274872400258L;
+
+    private AdminService adminService;
+
+    @Override
+    public void init() {
+        ServletContext ctx = getServletContext();
+        this.adminService = (AdminService) ctx.getAttribute("adminService");
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String token = (String) session.getAttribute("token");
-
-
-        AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                new AnnotationConfigApplicationContext(AppConfig.class);
-        AdminService adminService = annotationConfigApplicationContext
-                .getBean("adminService", AdminService.class);
 
         List<FacultyDto> faculties = adminService.getAllFaculties(token);
         req.setAttribute("faculties", faculties);
@@ -50,11 +54,6 @@ public class CreationServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         String token = (String) session.getAttribute("token");
-
-        AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                new AnnotationConfigApplicationContext(AppConfig.class);
-        AdminService adminService = annotationConfigApplicationContext
-                .getBean("adminService", AdminService.class);
 
         if (Objects.nonNull(req.getParameter("createFacultyButton"))) {
             CreateFacultyDto createFacultyDto = CreateFacultyDto.builder()
@@ -96,6 +95,6 @@ public class CreationServlet extends HttpServlet {
 
             doGet(req, resp);
         }
-
     }
+
 }

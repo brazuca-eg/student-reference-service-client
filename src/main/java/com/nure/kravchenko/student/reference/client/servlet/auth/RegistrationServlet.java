@@ -1,12 +1,11 @@
 package com.nure.kravchenko.student.reference.client.servlet.auth;
 
-import com.nure.kravchenko.student.reference.client.config.AppConfig;
 import com.nure.kravchenko.student.reference.client.payload.RegistrationDto;
 import com.nure.kravchenko.student.reference.client.service.AuthService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +17,16 @@ import java.util.Objects;
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {
 
+    private static final long serialVersionUID = 538442085280973742L;
+
+    private AuthService authService;
+
+    @Override
+    public void init() {
+        ServletContext ctx = getServletContext();
+        this.authService = (AuthService) ctx.getAttribute("authService");
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/register.jsp");
@@ -28,11 +37,6 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         if (Objects.nonNull(req.getParameter("submitButton"))) {
-            AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                    new AnnotationConfigApplicationContext(AppConfig.class);
-            AuthService authService = annotationConfigApplicationContext
-                    .getBean("authService", AuthService.class);
-
             String password1 = req.getParameter("password");
             String password2 = req.getParameter("password2");
             if (!StringUtils.equals(password1, password2)) {

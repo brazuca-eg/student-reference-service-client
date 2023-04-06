@@ -1,13 +1,12 @@
 package com.nure.kravchenko.student.reference.client.servlet.admin;
 
-import com.nure.kravchenko.student.reference.client.config.AppConfig;
 import com.nure.kravchenko.student.reference.client.payload.ApproveStudentRegisterDto;
 import com.nure.kravchenko.student.reference.client.server.StudentDto;
 import com.nure.kravchenko.student.reference.client.server.StudentGroupDto;
 import com.nure.kravchenko.student.reference.client.service.AdminService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,16 +21,20 @@ import java.util.Objects;
 @WebServlet("/adminShowStudent/*")
 public class WatchStudentServlet extends HttpServlet {
 
+    private static final long serialVersionUID = -8001213719392216900L;
+
+    private AdminService adminService;
+
+    @Override
+    public void init() {
+        ServletContext ctx = getServletContext();
+        this.adminService = (AdminService) ctx.getAttribute("adminService");
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Long id = (Long) session.getAttribute("userId");
         String token = (String) session.getAttribute("token");
-
-        AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                new AnnotationConfigApplicationContext(AppConfig.class);
-        AdminService adminService = annotationConfigApplicationContext
-                .getBean("adminService", AdminService.class);
 
         Long studentId = Long.valueOf(req.getPathInfo().substring(1));
 
@@ -54,11 +57,6 @@ public class WatchStudentServlet extends HttpServlet {
         String token = (String) session.getAttribute("token");
 
         if (Objects.nonNull(req.getParameter("approveStudentButton"))) {
-            AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                    new AnnotationConfigApplicationContext(AppConfig.class);
-            AdminService adminService = annotationConfigApplicationContext
-                    .getBean("adminService", AdminService.class);
-
             Long studentId = Long.valueOf(req.getPathInfo().substring(1));
             String groupName = req.getParameter("studentGroup");
             String serialNumber = req.getParameter("serialNumber");

@@ -1,12 +1,11 @@
 package com.nure.kravchenko.student.reference.client.servlet.student;
 
-import com.nure.kravchenko.student.reference.client.config.AppConfig;
 import com.nure.kravchenko.student.reference.client.server.StudentDto;
 import com.nure.kravchenko.student.reference.client.server.StudentGroupDto;
 import com.nure.kravchenko.student.reference.client.service.StudentService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,17 +18,22 @@ import java.util.Objects;
 @WebServlet("/student")
 public class StudentMainServlet extends HttpServlet {
 
+    private static final long serialVersionUID = 5473885369742362015L;
+
+    private StudentService studentService;
+
+    @Override
+    public void init() {
+        ServletContext ctx = getServletContext();
+        this.studentService = (StudentService) ctx.getAttribute("studentService");
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Long id = (Long) session.getAttribute("userId");
         String token = (String) session.getAttribute("token");
 
-
-        AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                new AnnotationConfigApplicationContext(AppConfig.class);
-        StudentService studentService = annotationConfigApplicationContext
-                .getBean("studentService", StudentService.class);
 
         StudentDto studentDto = studentService.getStudentById(id, token);
         if (Objects.nonNull(studentDto)) {

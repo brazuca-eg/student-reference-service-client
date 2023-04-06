@@ -1,12 +1,11 @@
 package com.nure.kravchenko.student.reference.client.servlet.student;
 
-import com.nure.kravchenko.student.reference.client.config.AppConfig;
 import com.nure.kravchenko.student.reference.client.payload.CreateRequestDto;
 import com.nure.kravchenko.student.reference.client.server.ReasonDto;
 import com.nure.kravchenko.student.reference.client.service.StudentService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,15 +19,20 @@ import java.util.Objects;
 @WebServlet("/createRequest")
 public class CreateRequestServlet extends HttpServlet {
 
+    private static final long serialVersionUID = 7856680687685113511L;
+
+    private StudentService studentService;
+
+    @Override
+    public void init() {
+        ServletContext ctx = getServletContext();
+        this.studentService = (StudentService) ctx.getAttribute("studentService");
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String token = (String) session.getAttribute("token");
-
-        AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                new AnnotationConfigApplicationContext(AppConfig.class);
-        StudentService studentService = annotationConfigApplicationContext
-                .getBean("studentService", StudentService.class);
 
         List<ReasonDto> reasons = studentService.getAllRequestReasonsForStudent(token);
         req.setAttribute("reasons", reasons);
@@ -53,10 +57,6 @@ public class CreateRequestServlet extends HttpServlet {
             createRequestDto.setNumber(number);
             createRequestDto.setReasonName(reasonName);
 
-            AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                    new AnnotationConfigApplicationContext(AppConfig.class);
-            StudentService studentService = annotationConfigApplicationContext
-                    .getBean("studentService", StudentService.class);
             studentService.createRequest(id, createRequestDto, token);
 
             req.setAttribute("response", "Запит на надання довідки створено");

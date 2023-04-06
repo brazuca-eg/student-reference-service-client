@@ -1,14 +1,13 @@
 package com.nure.kravchenko.student.reference.client.servlet.auth;
 
-import com.nure.kravchenko.student.reference.client.config.AppConfig;
 import com.nure.kravchenko.student.reference.client.model.Role;
 import com.nure.kravchenko.student.reference.client.payload.LoginDto;
 import com.nure.kravchenko.student.reference.client.server.UserLoggedInDto;
 import com.nure.kravchenko.student.reference.client.service.AuthService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +19,16 @@ import java.util.Objects;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 6904919491945405362L;
+
+    private AuthService authService;
+
+    @Override
+    public void init() {
+        ServletContext ctx = getServletContext();
+        this.authService = (AuthService) ctx.getAttribute("authService");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,11 +47,6 @@ public class LoginServlet extends HttpServlet {
                 req.setAttribute("error", "All fields should be entered for login operation");
                 doGet(req, resp);
             } else {
-                AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                        new AnnotationConfigApplicationContext(AppConfig.class);
-                AuthService authService = annotationConfigApplicationContext
-                        .getBean("authService", AuthService.class);
-
                 LoginDto loginDto = new LoginDto();
                 loginDto.setEmail(req.getParameter("email"));
                 loginDto.setPassword(req.getParameter("password"));
@@ -66,7 +70,7 @@ public class LoginServlet extends HttpServlet {
                         if (isApprovedAccount) {
                             resp.sendRedirect(req.getContextPath() + "/worker");
                         }
-                    } else if(StringUtils.equalsIgnoreCase(Role.ADMIN.name(), role)){
+                    } else if (StringUtils.equalsIgnoreCase(Role.ADMIN.name(), role)) {
                         resp.sendRedirect(req.getContextPath() + "/admin");
                     }
 
