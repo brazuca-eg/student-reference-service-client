@@ -31,11 +31,14 @@
         <table class="table">
             <thead class="thead-light">
             <tr>
-                <th scope="col">Дата подання заявки</th>
-                <th scope="col">Місце для подання довідки</th>
+                <th scope="col">Дата подання</th>
+                <th scope="col">Місце подання</th>
                 <th scope="col">Опис причини</th>
-                <th scope="col">Дата надання довідки</th>
-                <th scope="col">Завантажити довідку</th>
+                <th scope="col">Робітник деканату</th>
+                <th scope="col">Email робітника</th>
+                <th scope="col">Робоча посада</th>
+                <th scope="col">Дата надання</th>
+                <th scope="col">Завантажити</th>
             </tr>
             </thead>
             <c:forEach items="${requests}" var="element">
@@ -47,6 +50,9 @@
                                         value="${parsedStartDate}"/></td>
                     <td><c:out value="${element.reasonName}"/></td>
                     <td><c:out value="${element.reasonDescription}"/></td>
+                    <td><c:out value="${element.workerFullName}"/></td>
+                    <td><c:out value="${element.workerEmail}"/></td>
+                    <td><c:out value="${element.workerJobTitle}"/></td>
                     <fmt:parseDate value="${element.endDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedEndDate"
                                    type="both"/>
                     <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${parsedEndDate}"/></td>

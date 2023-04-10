@@ -19,8 +19,8 @@
     <table class="table">
       <thead class="thead-light">
       <tr>
-        <th scope="col">Дата подання заявки</th>
-        <th scope="col">Місце для подання довідки</th>
+        <th scope="col">Дата подання</th>
+        <th scope="col">Місце подання</th>
         <th scope="col">Опис причини</th>
         <th scope="col">Причина відмови</th>
         <th scope="col">Дата відмови</th>

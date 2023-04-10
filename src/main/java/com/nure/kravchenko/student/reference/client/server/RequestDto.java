@@ -29,4 +29,10 @@ public class RequestDto {
 
     private String comment;
 
+    private String workerFullName;
+
+    private String workerEmail;
+
+    private String workerJobTitle;
+
 }

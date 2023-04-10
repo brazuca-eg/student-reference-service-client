@@ -2,6 +2,7 @@ package com.nure.kravchenko.student.reference.client.servlet.student;
 
 import com.nure.kravchenko.student.reference.client.server.StudentDto;
 import com.nure.kravchenko.student.reference.client.server.StudentGroupDto;
+import com.nure.kravchenko.student.reference.client.server.StudentToUniInfoDto;
 import com.nure.kravchenko.student.reference.client.service.StudentService;
 
 import javax.servlet.RequestDispatcher;
@@ -38,9 +39,9 @@ public class StudentMainServlet extends HttpServlet {
         StudentDto studentDto = studentService.getStudentById(id, token);
         if (Objects.nonNull(studentDto)) {
             req.setAttribute("current", studentDto);
-            StudentGroupDto studentGroupDto = studentService.getGroupByStudent(id, token);
-            if (Objects.nonNull(studentGroupDto)) {
-                req.setAttribute("group", studentGroupDto);
+            StudentToUniInfoDto studentToUniInfoDto = studentService.getUniInfoByStudent(id, token);
+            if (Objects.nonNull(studentToUniInfoDto)) {
+                req.setAttribute("uniInfo", studentToUniInfoDto);
             }
         }
 

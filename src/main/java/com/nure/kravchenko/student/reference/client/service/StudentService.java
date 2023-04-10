@@ -37,6 +37,14 @@ public class StudentService {
         return responseEntity.getBody();
     }
 
+    public StudentToUniInfoDto getUniInfoByStudent(Long id, String token) {
+        ResponseEntity<StudentToUniInfoDto> responseEntity = communication.getRestTemplate()
+                .exchange(communication.getStudentReferenceRestUrl() + "/students/" + id + "/uniInfo",
+                        HttpMethod.GET, createHttpEntityWithAuthorizationToken(token), StudentToUniInfoDto.class);
+
+        return responseEntity.getBody();
+    }
+
     public List<ReasonDto> getAllRequestReasonsForStudent(String token) {
         ResponseEntity<List<ReasonDto>> responseEntity = communication.getRestTemplate()
                 .exchange(communication.getStudentReferenceRestUrl() + "/students/" + "/reasons",

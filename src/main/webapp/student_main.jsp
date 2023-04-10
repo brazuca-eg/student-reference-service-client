@@ -33,14 +33,18 @@
                 <img class="border rounded-circle p-2 mx-auto mb-3" src="img/nure.png"
                      style="width: 80px; height: 80px;">
                 <h5 class="mb-0">
-                    <c:out value="${current.name} ${current.surname} ${current.fatherhood}"/>
+                    <c:out value="${current.surname} ${current.name} ${current.fatherhood}"/>
                 </h5>
-                <p>Пошта: <c:out value="${current.email}"/></p>
+                <p>Поштовий акаунт ХНУРЕ: <c:out value="${current.email}"/></p>
                 <p>Стать: <c:out value="${current.gender}"/></p>
-                <p>Група: <c:out value="${group.name}"/></p>
-                <p>Форма навчання: <c:out value="${group.learnForm}"/></p>
-                <p>Дата початку навчання: <c:out value="${group.startYear}"/></p>
-                <p>Дата закінчення навчання: <c:out value="${group.endYear}"/></p>
+                <p>Факультет: <c:out value="${uniInfo.facultyName}"/></p>
+                <p>Спеціальність: <c:out value="${uniInfo.specialityName}"/></p>
+                <p>Освітня програма: <c:out value="${uniInfo.educationalProgram}"/></p>
+                <p>Група: <c:out value="${uniInfo.groupName}"/></p>
+                <p>Дата початку навчання у групі: <c:out value="${uniInfo.groupStartYear}"/></p>
+                <p>Дата закінчення навчання у групі: <c:out value="${uniInfo.groupEndYear}"/></p>
+                <p>Форма навчання: <c:out value="${uniInfo.learnForm}"/></p>
+                <p>Ступінь освіти, який набувається: <c:out value="${uniInfo.degreeForm}"/></p>
             </div>
         </div>
     </div>

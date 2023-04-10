@@ -4,7 +4,6 @@
 
 <!doctype html>
 
-
 <head>
   <title>Перегляд запитів довідок</title>
   <jsp:include page="style.jsp"/>
@@ -13,7 +12,6 @@
 <body>
 <jsp:include page="header_worker.jsp"/>
 
-
 <div class="container">
   <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
     <h6 class="section-title bg-white text-center text-primary px-3">Надані довідки</h6>
@@ -21,10 +19,12 @@
     <table class="table">
       <thead class="thead-light">
       <tr>
-        <th scope="col">Дата подання заявки</th>
-        <th scope="col">Місце для подання довідки</th>
-        <th scope="col">Опис причини надання</th>
+        <th scope="col">Дата подання</th>
+        <th scope="col">Місце подання</th>
+        <th scope="col">Опис причини</th>
         <th scope="col">Студент</th>
+        <th scope="col">Спеціальність</th>
+        <th scope="col">Освітня програма</th>
         <th scope="col">Група</th>
         <th scope="col">Причина відмови</th>
         <th scope="col">Дата відмови</th>
@@ -38,6 +38,8 @@
           <td><c:out value="${element.reasonName}"/></td>
           <td><c:out value="${element.reasonDescription}"/></td>
           <td><c:out value="${element.studentFullName}"/></td>
+          <td><c:out value="${element.specialityName}"/></td>
+          <td><c:out value="${element.educationalProgram}"/></td>
           <td><c:out value="${element.groupName}"/></td>
           <td><c:out value="${element.comment}"/></td>
           <fmt:parseDate value="${element.endDate}"  pattern="yyyy-MM-dd'T'HH:mm" var="parsedEndDate" type="both" />

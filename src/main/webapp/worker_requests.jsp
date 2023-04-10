@@ -4,7 +4,6 @@
 
 <!doctype html>
 
-
 <head>
     <title>Перегляд запитів довідок</title>
     <jsp:include page="style.jsp"/>
@@ -24,13 +23,15 @@
         <table class="table">
             <thead class="thead-light">
             <tr>
-                <th scope="col">Дата подання заявки</th>
-                <th scope="col">Місце для подання довідки</th>
-                <th scope="col">Опис причини надання</th>
+                <th scope="col">Дата заявки</th>
+                <th scope="col">Місце подання</th>
+                <th scope="col">Опис причини</th>
                 <th scope="col">Студент</th>
+                <th scope="col">Спеціальність</th>
+                <th scope="col">Освітня програма</th>
                 <th scope="col">Група</th>
-                <th>Підтвердити надання</th>
-                <th>Відмовити від надання</th>
+                <th>Підтвердити видачу</th>
+                <th>Відмовити видачу</th>
             </tr>
             </thead>
             <c:forEach items="${waitingRequests}" var="element">
@@ -41,6 +42,8 @@
                     <td><c:out value="${element.reasonName}"/></td>
                     <td><c:out value="${element.reasonDescription}"/></td>
                     <td><c:out value="${element.studentFullName}"/></td>
+                    <td><c:out value="${element.specialityName}"/></td>
+                    <td><c:out value="${element.educationalProgram}"/></td>
                     <td><c:out value="${element.groupName}"/></td>
                     <td>
                         <form method="post">
@@ -51,7 +54,7 @@
                     </td>
                     <td>
                         <form method="post">
-                            <input type="text" id="deniedComment" class="form-control form-control-sm" name="deniedComment" placeholder="Причина відмови надання довідки"/>
+                            <input type="text" id="deniedComment" class="form-control form-control-sm" name="deniedComment" placeholder="Причина"/>
                             <input id="deniedRequestId" name="deniedRequestId" type="hidden" value="<c:out value = "${element.id}"/>">
                             <button type="submit" class="btn btn-primary btn-sm" value="val" name="denyRequestButton">Відмовити надання</button>
                         </form>

@@ -21,13 +21,15 @@
     <table class="table">
       <thead class="thead-light">
       <tr>
-        <th scope="col">Дата подання заявки</th>
-        <th scope="col">Місце для подання довідки</th>
-        <th scope="col">Опис причини надання</th>
+        <th scope="col">Дата заявки</th>
+        <th scope="col">Місце подання</th>
+        <th scope="col">Опис причини</th>
         <th scope="col">Студент</th>
+        <th scope="col">Спеціальність</th>
+        <th scope="col">Освітня програма</th>
         <th scope="col">Група</th>
-        <th scope="col">Дата надання довідки</th>
-        <th scope="col">Завантажити довідку</th>
+        <th scope="col">Дата надання</th>
+        <th scope="col">Завантажити</th>
       </tr>
       </thead>
       <c:forEach items="${assignedReports}" var="element">
@@ -38,6 +40,8 @@
           <td><c:out value="${element.reasonName}"/></td>
           <td><c:out value="${element.reasonDescription}"/></td>
           <td><c:out value="${element.studentFullName}"/></td>
+          <td><c:out value="${element.specialityName}"/></td>
+          <td><c:out value="${element.educationalProgram}"/></td>
           <td><c:out value="${element.groupName}"/></td>
           <fmt:parseDate value="${element.endDate}"  pattern="yyyy-MM-dd'T'HH:mm" var="parsedEndDate" type="both" />
           <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${parsedEndDate}" /></td>

@@ -35,11 +35,10 @@
                 <h5 class="mb-0">
                     <c:out value="${current.name} ${current.surname} ${current.fatherhood}"/>
                 </h5>
-                <p>Пошта: <c:out value="${current.email}"/></p>
+                <p>Поштовий акаунт ХНУРЕ: <c:out value="${current.email}"/></p>
                 <p>Стать: <c:out value="${current.gender}"/></p>
                 <p>Робоча посада: <c:out value="${current.jobTitle}"/></p>
-                <p>Форма навчання: <c:out value="${group.learnForm}"/></p>
-                <p>Назва факультету працівника: <c:out value="${faculty.name}"/></p>
+                <p>Назва робочого факультету: <c:out value="${faculty.name}"/></p>
                 <p>Скорочена назва факультету: <c:out value="${faculty.shortName}"/></p>
             </div>
         </div>
