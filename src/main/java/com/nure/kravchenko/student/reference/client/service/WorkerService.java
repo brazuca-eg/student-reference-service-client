@@ -37,6 +37,16 @@ public class WorkerService {
         return responseEntity.getBody();
     }
 
+    public List<ReasonDto> getAllRequestReasons(String token) {
+        ResponseEntity<List<ReasonDto>> responseEntity = communication.getRestTemplate()
+                .exchange(communication.getStudentReferenceRestUrl() + "/workers/requests/reasons",
+                        HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
+                        new ParameterizedTypeReference<List<ReasonDto>>() {
+                        });
+
+        return responseEntity.getBody();
+    }
+
     public List<WorkerRequestDto> getAssignedWorkerRequests(Long id, boolean approved, String token) {
         ResponseEntity<List<WorkerRequestDto>> responseEntity = communication.getRestTemplate()
                 .exchange(communication.getStudentReferenceRestUrl() + "/workers/" + id + "/requests/assigned" +

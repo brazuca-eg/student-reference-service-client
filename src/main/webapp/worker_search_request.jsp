@@ -13,37 +13,55 @@
 <body>
 <jsp:include page="header_worker.jsp"/>
 
-<div class="col-lg-3 col-md-6">
-  <h4 class="text-white mb-3">Newsletter</h4>
-  <p>Пошук наданих довідок</p>
+<div class="col-lg-3 col-md-6; align-items-center" >
+  <h4 class="text-white mb-3" style="color: #181d38">Пошук наданих довідок</h4>
   <form method="get">
     <div class="position-relative mx-auto" style="max-width: 450px;">
-      <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" name="searchRequest" placeholder="Введіть дані для пошуку">
 
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="searchParam" id="searchParam1" value="byStudent">
-        <label class="form-check-label" for="searchParam1">
-          За ім'ям студента
+        <input class="form-check-input" type="checkbox" name="fullNameParam" id="fullNameParam">
+        <label class="form-check-label" for="fullNameParam">
+          За ПІБ студента
         </label>
+        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" name="fullNameToSearch" placeholder="Введіть ПІБ студента">
       </div>
+
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="searchParam" id="searchParam2" checked value="byGroup">
-        <label class="form-check-label" for="searchParam2">
+        <input class="form-check-input" type="checkbox" name="groupParam" id="groupParam">
+        <label class="form-check-label" for="groupParam">
           За групою
         </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="searchParam" id="searchParam3" checked value="byDate">
-        <label class="form-check-label" for="searchParam3">
-          За датою у форматі (рік-місяць-день)
-        </label>
+        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" name="groupToSearch" placeholder="Введіть групу студента">
       </div>
 
-      <button type="submit" value="submit" name="searchButton" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Пошук</button>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="dateParam" id="dateParam">
+        <label class="form-check-label" for="dateParam">
+          За датою надання
+        </label>
+        <input  type="date" name="dateToSearch" id="dateToSearch">
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="reasonParam" id="reasonParam">
+        <label class="form-check-label" for="reasonParam">
+          За місцем надання
+        </label>
+        <select name="reasonToSearch" id="reasonToSearch" class="form-control">
+          <c:forEach items="${reasons}" var="element">
+            <option value="<c:out value="${element.name}"/>"><c:out value="${element.name}"/></option>
+          </c:forEach>
+        </select>
+        <label for="reasonToSearch">Оберіть місце подання</label>
+
+      </div>
+
+      <p><button type="submit" value="search" name="searchButton" class="btn btn-primary btn-sm">Пошук</button></p>
     </div>
+
   </form>
 </div>
-
+<p align="center" style="color:red;"><c:out value='${requestScope["errorResponse"]}'/></p>
 <hr>
 
 <form method="get">

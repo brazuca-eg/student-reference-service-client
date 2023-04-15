@@ -14,28 +14,19 @@
 
 <jsp:include page="header_admin.jsp"/>
 
+<div class="container">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h6 class="section-title bg-white text-center text-primary px-3">Перегляд заявки здобувача вищої освіти</h6>
+        <h1 class="mb-5"></h1>
+                    <p>Ім'я: <c:out value="${student.name}"/></p>
 
-<div class="container-xxl py-5" align="center">
-    <div class="container">
-        <div class="row g-5">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                <h6 class="section-title bg-white text-start text-primary pe-3">Перегляд здобувача вищої освіти</h6>
-                <div class="row gy-2 gx-4 mb-4">
-                    <p>Ім'я</p>
-                    <p><c:out value="${student.name}"/></p>
+                    <p>Прізвище: <c:out value="${student.surname}"/></p>
 
-                    <p>Прізвище:</p>
-                    <p><c:out value="${student.surname}"/></p>
+                    <p>По батькові: <c:out value="${student.fatherhood}"/></p>
 
-                    <p>По батькові:</p>
-                    <p><c:out value="${student.fatherhood}"/></p>
+                    <p>Email: <c:out value="${student.email}"/></p>
 
-                    <p>Email:</p>
-                    <p><c:out value="${student.email}"/></p>
-
-                    <p>Стать:</p>
-                    <p><c:out value="${student.gender}"/></p>
-
+                    <p>Стать: <c:out value="${student.gender}"/></p>
 
                     <c:choose>
                         <c:when test="${student.approved == false}">
@@ -93,11 +84,9 @@
                         </c:otherwise>
                     </c:choose>
 
-                </div>
-            </div>
-        </div>
     </div>
 </div>
+
 
 
 <jsp:include page="footer.jsp"/>
