@@ -14,4 +14,8 @@ public class ReportFilter {
 
     private String reasonName;
 
+    private String specialityName;
+
+    private String educationalProgram;
+
 }

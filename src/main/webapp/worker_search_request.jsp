@@ -13,8 +13,8 @@
 <body>
 <jsp:include page="header_worker.jsp"/>
 
-<div class="col-lg-3 col-md-6; align-items-center" >
-  <h4 class="text-white mb-3" style="color: #181d38">Пошук наданих довідок</h4>
+<div class="col-lg-3 col-md-6; align-items-center" style="margin:0 auto;">
+  <h4 style="color: #181d38">Параметри для пошуку наданих довідок</h4>
   <form method="get">
     <div class="position-relative mx-auto" style="max-width: 450px;">
 
@@ -43,6 +43,21 @@
       </div>
 
       <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="specialityParam" id="specialityParam">
+        <label class="form-check-label" for="specialityParam">
+          За спеціальністю та освітньою програмою
+        </label>
+        <select name="specialityToSearch" id="specialityToSearch" class="form-control">
+          <c:forEach items="${specialities}" var="element">
+            <option value="<c:out value="${element.id}"/>">
+              <c:out value="${element.number} ${element.name} (${element.educationalProgram})"/>
+            </option>
+          </c:forEach>
+        </select>
+        <label for="specialityToSearch">Оберіть спеціальність та освітню програму</label>
+      </div>
+
+      <div class="form-check">
         <input class="form-check-input" type="checkbox" name="reasonParam" id="reasonParam">
         <label class="form-check-label" for="reasonParam">
           За місцем надання
@@ -53,7 +68,6 @@
           </c:forEach>
         </select>
         <label for="reasonToSearch">Оберіть місце подання</label>
-
       </div>
 
       <p><button type="submit" value="search" name="searchButton" class="btn btn-primary btn-sm">Пошук</button></p>
@@ -62,11 +76,14 @@
   </form>
 </div>
 <p align="center" style="color:red;"><c:out value='${requestScope["errorResponse"]}'/></p>
-<hr>
 
-<form method="get">
-  <button type="submit" value="clear" name="clearButton" class="btn btn-primary btn-sm">Очистити дані пошуку</button>
-</form>
+<div class="col-lg-3 col-md-6; align-items-center" style="margin:0 auto;">
+  <form method="get">
+    <button type="submit" value="clear" name="clearButton" class="btn btn-primary btn-sm">Очистити дані пошуку</button>
+  </form>
+</div>
+
+<hr>
 
 <c:choose>
   <c:when test="${fn:length(assignedReports) > 0}">

@@ -23,6 +23,8 @@ public class WorkerSearchReportFilter {
             String groupName = filter.getGroupName();
             LocalDate reportEndDate = filter.getReportDate();
             String reasonName = filter.getReasonName();
+            String specialityName = filter.getSpecialityName();
+            String educationalProgram = filter.getEducationalProgram();
 
             List<Predicate<WorkerRequestDto>> predicates = new ArrayList<>();
             if (StringUtils.isNoneBlank(studentFullName)) {
@@ -52,6 +54,14 @@ public class WorkerSearchReportFilter {
                 Predicate<WorkerRequestDto> reasonNamePredicate =
                         (a) -> a.getReasonName().contains(reasonName);
                 predicates.add(reasonNamePredicate);
+            }
+            if (StringUtils.isNoneBlank(specialityName) && StringUtils.isNoneBlank(educationalProgram)) {
+                Predicate<WorkerRequestDto> specialityNamePredicate =
+                        (a) -> a.getSpecialityName().equalsIgnoreCase(specialityName);
+                predicates.add(specialityNamePredicate);
+                Predicate<WorkerRequestDto> educationalProgramPredicate =
+                        (a) -> a.getEducationalProgram().equalsIgnoreCase(educationalProgram);
+                predicates.add(educationalProgramPredicate);
             }
             for (Predicate<WorkerRequestDto> predicate : predicates) {
                 reports = reports

@@ -2,6 +2,7 @@ package com.nure.kravchenko.student.reference.client.servlet.worker;
 
 import com.nure.kravchenko.student.reference.client.filter.ReportFilter;
 import com.nure.kravchenko.student.reference.client.server.ReasonDto;
+import com.nure.kravchenko.student.reference.client.server.SpecialityDto;
 import com.nure.kravchenko.student.reference.client.server.WorkerRequestDto;
 import com.nure.kravchenko.student.reference.client.service.WorkerService;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.nure.kravchenko.student.reference.client.service.filter.WorkerSearchReportFilter.filterReports;
 import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.WORKER_SEARCH_REQUEST_PAGE;
@@ -44,6 +46,9 @@ public class FindRequestServlet extends HttpServlet {
 
         List<ReasonDto> reasons = workerService.getAllRequestReasons(token);
         req.setAttribute("reasons", reasons);
+
+        List<SpecialityDto> specialities = workerService.getAllSpecialities(token);
+        req.setAttribute("specialities", specialities);
 
         if (Objects.nonNull(req.getParameter("searchButton"))) {
             List<WorkerRequestDto> assignedReports = workerService.getAssignedWorkerRequests(id, true, token);
@@ -77,6 +82,17 @@ public class FindRequestServlet extends HttpServlet {
                     errorResponse = errorResponse.concat("Ви не обрали місце подання;\n");
                 }
                 filter.setReasonName(reasonName);
+            }
+            if (req.getParameter("specialityParam") != null) {
+                Long specialityId = Long.valueOf(req.getParameter("specialityToSearch"));
+                if (specialityId == null) {
+                    errorResponse = errorResponse.concat("Ви не обрали спеціальність та освітню програму;\n");
+                }
+                SpecialityDto specialityDto = specialities.stream()
+                        .filter(a -> Objects.equals(a.getId(), specialityId))
+                        .findFirst().get();
+                filter.setSpecialityName(specialityDto.getName());
+                filter.setEducationalProgram(specialityDto.getEducationalProgram());
             }
 
             if (StringUtils.isNoneBlank(errorResponse)) {
