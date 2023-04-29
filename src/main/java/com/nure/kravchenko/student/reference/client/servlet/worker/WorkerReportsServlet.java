@@ -34,7 +34,13 @@ public class WorkerReportsServlet extends HttpServlet {
         String token = (String) session.getAttribute("token");
         Long id = (Long) session.getAttribute("userId");
 
-        List<WorkerRequestDto> assignedReports = workerService.getAssignedWorkerRequests(id, true, token);
+        String requestFilter = null;
+        if(Objects.nonNull(req.getParameter("requestFilterButton"))){
+            requestFilter = req.getParameter("requestFilter");
+        }
+
+        List<WorkerRequestDto> assignedReports = workerService
+                .getAssignedWorkerRequests(id, true, requestFilter, token);
         req.setAttribute("assignedReports", assignedReports);
 
         if (Objects.nonNull(req.getParameter("downloadReport"))) {

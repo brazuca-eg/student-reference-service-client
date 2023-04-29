@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static com.nure.kravchenko.student.reference.client.service.filter.WorkerSearchReportFilter.filterReports;
 import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.WORKER_SEARCH_REQUEST_PAGE;
@@ -51,7 +50,8 @@ public class FindRequestServlet extends HttpServlet {
         req.setAttribute("specialities", specialities);
 
         if (Objects.nonNull(req.getParameter("searchButton"))) {
-            List<WorkerRequestDto> assignedReports = workerService.getAssignedWorkerRequests(id, true, token);
+            List<WorkerRequestDto> assignedReports = workerService
+                    .getAssignedWorkerRequests(id, true, null, token);
 
             String errorResponse = StringUtils.EMPTY;
             ReportFilter filter = new ReportFilter();

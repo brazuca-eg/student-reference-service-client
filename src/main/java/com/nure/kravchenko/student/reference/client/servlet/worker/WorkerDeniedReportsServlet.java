@@ -33,7 +33,8 @@ public class WorkerDeniedReportsServlet extends HttpServlet {
         String token = (String) session.getAttribute("token");
         Long id = (Long) session.getAttribute("userId");
 
-        List<WorkerRequestDto> assignedDeniedReports = workerService.getAssignedWorkerRequests(id, false, token);
+        List<WorkerRequestDto> assignedDeniedReports = workerService
+                .getAssignedWorkerRequests(id, false, null, token);
         req.setAttribute("assignedDeniedReports", assignedDeniedReports);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/worker_denied_reports.jsp");

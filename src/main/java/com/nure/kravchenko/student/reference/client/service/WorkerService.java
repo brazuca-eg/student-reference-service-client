@@ -57,10 +57,10 @@ public class WorkerService {
         return responseEntity.getBody();
     }
 
-    public List<WorkerRequestDto> getAssignedWorkerRequests(Long id, boolean approved, String token) {
+    public List<WorkerRequestDto> getAssignedWorkerRequests(Long id, boolean approved, String filter, String token) {
         ResponseEntity<List<WorkerRequestDto>> responseEntity = communication.getRestTemplate()
                 .exchange(communication.getStudentReferenceRestUrl() + "/workers/" + id + "/requests/assigned" +
-                                "?approved=" + approved,
+                                "?approved=" + approved + "&" + "filter=" + filter,
                         HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
                         new ParameterizedTypeReference<List<WorkerRequestDto>>() {
                         });
@@ -68,10 +68,10 @@ public class WorkerService {
         return responseEntity.getBody();
     }
 
-    public List<WorkerRequestDto> getNonAssignedRequestsByWorkerFaculty(Long id, String token) {
+    public List<WorkerRequestDto> getNonAssignedRequestsByWorkerFaculty(Long id, String filter, String token) {
         ResponseEntity<List<WorkerRequestDto>> responseEntity = communication.getRestTemplate()
-                .exchange(communication.getStudentReferenceRestUrl() + "/workers/" + id + "/requests/nonAssigned",
-                        HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
+                .exchange(communication.getStudentReferenceRestUrl() + "/workers/" + id + "/requests/nonAssigned"
+                                + "?" + "filter=" + filter, HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
                         new ParameterizedTypeReference<List<WorkerRequestDto>>() {
                         });
 

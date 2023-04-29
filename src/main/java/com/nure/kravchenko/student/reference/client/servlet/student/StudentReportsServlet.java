@@ -35,11 +35,12 @@ public class StudentReportsServlet extends HttpServlet {
         String token = (String) session.getAttribute("token");
         Long id = (Long) session.getAttribute("userId");
 
-        String requestFilter = null;
-        if (Objects.nonNull(req.getParameter("reasonNameFilter"))) {
-            requestFilter = "reasonName";
+        String reportFilter = null;
+        if(Objects.nonNull(req.getParameter("requestReportFilterButton"))){
+            reportFilter = req.getParameter("requestReportFilter");
         }
-        List<RequestDto> requests = studentService.getRequestForStudent(id, RequestType.APPROVED, requestFilter, token);
+
+        List<RequestDto> requests = studentService.getRequestForStudent(id, RequestType.APPROVED, reportFilter, token);
         req.setAttribute("requests", requests);
 
         if (Objects.nonNull(req.getParameter("downloadReport"))) {

@@ -12,12 +12,40 @@
 <body>
 <jsp:include page="header_worker.jsp"/>
 
-<form method="get">
-    <button type="submit" value="reasonNameFilter" name="reasonNameFilter">Filter by reason name</button>
-</form>
-
 <div class="container">
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+
+        <h6 class="section-title bg-white text-center text-primary px-3">Сортувати запити</h6>
+        <form method="get">
+            <div class="container">
+                <select name="requestFilter" id="requestFilter" class="form-select form-select-sm">
+                    <option value="reasonNameFilterAsc">Сортувати за місцем подання довідки (А-Я)</option>
+                    <option value="reasonNameFilterDesc">Сортувати за місцем подання довідки (Я-А)</option>
+
+                    <option value="startDateFilterAsc">Сортувати за датою заявки (зростанням)</option>
+                    <option value="startDateFilterDesc">Сортувати за датою заявки (спаданням)</option>
+
+                    <option value="studentFilterAsc">Сортувати за email студента (А-Я)</option>
+                    <option value="studentFilterDesc">Сортувати за email студента (Я-А)</option>
+
+                    <option value="specialityFilterAsc">Сортувати за назвою спеціальності (А-Я)</option>
+                    <option value="specialityFilterDesc">Сортувати за назвою спеціальності (Я-А)</option>
+
+                    <option value="educationalProgramFilterAsc">Сортувати за назвою освітньою програмою (А-Я)</option>
+                    <option value="educationalProgramFilterDesc">Сортувати за назвою освітньою програмою (Я-А)</option>
+
+                    <option value="groupFilterAsc">Сортувати за назвою групи (А-Я)</option>
+                    <option value="groupFilterDesc">Сортувати за назвою групи (Я-А)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm" value="sort" name="requestFilterButton">
+                Застосувати
+            </button>
+        </form>
+
+        <hr>
+
         <h6 class="section-title bg-white text-center text-primary px-3">Заявки на надання довідок від здобувачів вищої освіти</h6>
         <h1 class="mb-5"></h1>
         <table class="table">

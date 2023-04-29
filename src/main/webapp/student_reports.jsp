@@ -12,20 +12,32 @@
 <body>
 <jsp:include page="header_student.jsp"/>
 
-<h6 class="section-title bg-white text-center text-primary px-3">Сортувати</h6>
-<form method="get">
-    <div class="container">
-        <select name="requestReasonFilter" id="requestReasonFilter" class="form-select form-select-sm">
-            <option value="reasonNameFilter">Сортувати за причиною надання довідки</option>
-            <option value="startDateFilter">Сортувати за датою подання заявки</option>
-            <option value="endDateFilter">Сортувати за датою надання довідки</option>
-            <option value="endDateFilter">Сортувати за назвою групи</option>
-        </select>
-    </div>
-</form>
 
 <div class="container">
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+
+        <h6 class="section-title bg-white text-center text-primary px-3">Сортувати надані довідки</h6>
+        <form method="get">
+            <div class="container">
+                <select name="requestReportFilter" id="requestReportFilter" class="form-select form-select-sm">
+                    <option value="reasonNameFilterAsc">Сортувати за місцем подання довідки (А-Я)</option>
+                    <option value="reasonNameFilterDesc">Сортувати за місцем подання довідки (Я-А)</option>
+
+                    <option value="endDateFilterAsc">Сортувати за датою надання довідки(зростанням)</option>
+                    <option value="endDateFilterDesc">Сортувати за датою надання довідки(спаданням)</option>
+
+                    <option value="workerFilterAsc">Сортувати за робітником деканату, який надав (А-Я)</option>
+                    <option value="workerFilterDesc">Сортувати за робітником деканату, який надав (Я-А)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm" value="sort" name="requestReportFilterButton">
+                Застосувати
+            </button>
+        </form>
+
+        <hr>
+
         <h6 class="section-title bg-white text-center text-primary px-3">Мої заявки на замовлення довідок</h6>
         <h1 class="mb-5"></h1>
         <table class="table">
