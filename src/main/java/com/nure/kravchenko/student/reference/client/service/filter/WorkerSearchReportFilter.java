@@ -21,7 +21,8 @@ public class WorkerSearchReportFilter {
         if(!reports.isEmpty()){
             String studentFullName = filter.getStudentFullName();
             String groupName = filter.getGroupName();
-            LocalDate reportEndDate = filter.getReportDate();
+            LocalDate reportStartDate = filter.getReportStartDate();
+            LocalDate reportEndDate = filter.getReportEndDate();
             String reasonName = filter.getReasonName();
             String specialityName = filter.getSpecialityName();
             String educationalProgram = filter.getEducationalProgram();
@@ -37,18 +38,12 @@ public class WorkerSearchReportFilter {
                         (a) -> a.getGroupName().contains(groupName);
                 predicates.add(groupNamePredicate);
             }
-            if (Objects.nonNull(reportEndDate)) {
-                Predicate<WorkerRequestDto> reportDateYearPredicate =
-                        (a) -> a.getEndDate().getYear() == reportEndDate.getYear();
-                predicates.add(reportDateYearPredicate);
+            if (Objects.nonNull(reportStartDate) && Objects.nonNull(reportEndDate)) {
+                Predicate<WorkerRequestDto> reportDatePredicate =
+                        (a) ->  a.getEndDate().toLocalDate().plusDays(1).isAfter(reportStartDate)
+                                && a.getEndDate().toLocalDate().minusDays(1).isBefore(reportEndDate);
 
-                Predicate<WorkerRequestDto> reportDateMonthPredicate =
-                        (a) -> a.getEndDate().getMonth() == reportEndDate.getMonth();
-                predicates.add(reportDateMonthPredicate);
-
-                Predicate<WorkerRequestDto> reportDateDayPredicate =
-                        (a) -> a.getEndDate().getDayOfMonth() == reportEndDate.getDayOfMonth();
-                predicates.add(reportDateDayPredicate);
+                predicates.add(reportDatePredicate);
             }
             if (StringUtils.isNoneBlank(reasonName)) {
                 Predicate<WorkerRequestDto> reasonNamePredicate =

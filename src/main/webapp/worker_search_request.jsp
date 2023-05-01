@@ -39,7 +39,10 @@
         <label class="form-check-label" for="dateParam">
           За датою надання
         </label>
-        <input  type="date" name="dateToSearch" id="dateToSearch">
+        <p>Початкова дата пошуку</p>
+        <input  type="date" name="startDateToSearch" id="startDateToSearch">
+        <p>Кінцева дата пошуку</p>
+        <input  type="date" name="endDateToSearch" id="endDateToSearch">
       </div>
 
       <div class="form-check">

@@ -70,11 +70,20 @@ public class FindRequestServlet extends HttpServlet {
                 filter.setGroupName(groupToSearch);
             }
             if (req.getParameter("dateParam") != null) {
-                LocalDate localDate = LocalDate.parse(req.getParameter("dateToSearch"));
-                if (Objects.isNull(localDate)) {
-                    errorResponse = errorResponse.concat("Ви не обрали дату;\n");
+                LocalDate startDate = LocalDate.parse(req.getParameter("startDateToSearch"));
+                LocalDate endDate = LocalDate.parse(req.getParameter("endDateToSearch"));
+
+                if (Objects.isNull(startDate)) {
+                    errorResponse = errorResponse.concat("Ви не обрали початкову дату;\n");
                 }
-                filter.setReportDate(localDate);
+                if (Objects.isNull(endDate)) {
+                    errorResponse = errorResponse.concat("Ви не обрали кінцеву дату;\n");
+                }
+                if (startDate.isAfter(endDate)) {
+                    errorResponse = errorResponse.concat("Початкова дата повинна бути до кінцевої;\n");
+                }
+                filter.setReportStartDate(startDate);
+                filter.setReportEndDate(endDate);
             }
             if (req.getParameter("reasonParam") != null) {
                 String reasonName = req.getParameter("reasonToSearch");

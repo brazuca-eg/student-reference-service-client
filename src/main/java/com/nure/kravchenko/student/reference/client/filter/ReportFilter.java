@@ -10,7 +10,9 @@ public class ReportFilter {
 
     private String studentFullName;
 
-    private LocalDate reportDate;
+    private LocalDate reportStartDate;
+
+    private LocalDate reportEndDate;
 
     private String reasonName;
 
