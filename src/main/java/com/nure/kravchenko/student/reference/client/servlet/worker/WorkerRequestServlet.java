@@ -7,16 +7,20 @@ import org.apache.commons.lang3.StringUtils;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
 @WebServlet("/workerRequests")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024, // 1 MB
+        maxFileSize = 1024 * 1024 * 10,      // 10 MB
+        maxRequestSize = 1024 * 1024 * 100   // 100 MB
+)
 public class WorkerRequestServlet extends HttpServlet {
 
     private static final long serialVersionUID = 4857955056132617622L;
@@ -37,7 +41,7 @@ public class WorkerRequestServlet extends HttpServlet {
         Long id = (Long) session.getAttribute("userId");
 
         String requestFilter = null;
-        if(Objects.nonNull(req.getParameter("requestFilterButton"))){
+        if (Objects.nonNull(req.getParameter("requestFilterButton"))) {
             requestFilter = req.getParameter("requestFilter");
         }
 
@@ -64,17 +68,20 @@ public class WorkerRequestServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String token = (String) session.getAttribute("token");
         Long id = (Long) session.getAttribute("userId");
-
         if (Objects.nonNull(req.getParameter("approveRequest"))) {
+            Part part = req.getPart("signFile");
+            InputStream fileContent = part.getInputStream();
+            byte[] imageBytes = fileContent.readAllBytes();
+
             Long requestId = Long.valueOf(req.getParameter("approveRequest"));
-            workerService.approveRequest(id, requestId, true, StringUtils.EMPTY, token);
+            workerService.approveRequest(id, requestId, true, StringUtils.EMPTY, imageBytes, token);
         }
         if (Objects.nonNull(req.getParameter("denyRequestButton"))) {
             Long deniedRequestId = Long.valueOf(req.getParameter("deniedRequestId"));
             String comment = req.getParameter("deniedComment");
-            workerService.approveRequest(id, deniedRequestId, false, comment, token);
+            // TODO: 01.05.2023
+            workerService.approveRequest(id, deniedRequestId, false, comment, null, token);
         }
-
         doGet(req, resp);
     }
 }

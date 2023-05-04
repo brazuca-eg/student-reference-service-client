@@ -58,6 +58,7 @@
                 <th scope="col">Спеціальність</th>
                 <th scope="col">Освітня програма</th>
                 <th scope="col">Група</th>
+                <th>Додати підпис</th>
                 <th>Підтвердити видачу</th>
                 <th>Відмовити видачу</th>
             </tr>
@@ -73,13 +74,17 @@
                     <td><c:out value="${element.specialityName}"/></td>
                     <td><c:out value="${element.educationalProgram}"/></td>
                     <td><c:out value="${element.groupName}"/></td>
-                    <td>
-                        <form method="post">
+                    <form method="post" enctype="multipart/form-data">
+                        <td>
+                            <input type="file" id="signFile" name="signFile">
+                        </td>
+                        <td>
                             <button type="submit" class="btn btn-primary btn-sm" value="<c:out value="${element.id}"/>" name="approveRequest">
                                 Підтвердити надання
                             </button>
-                        </form>
-                    </td>
+                        </td>
+                    </form>
+
                     <td>
                         <form method="post">
                             <input type="text" id="deniedComment" class="form-control form-control-sm" name="deniedComment" placeholder="Причина"/>
