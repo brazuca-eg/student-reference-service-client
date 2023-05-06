@@ -70,6 +70,17 @@ public class WorkerRequestServlet extends HttpServlet {
         Long id = (Long) session.getAttribute("userId");
         if (Objects.nonNull(req.getParameter("approveRequest"))) {
             Part part = req.getPart("signFile");
+            String imageName = part.getSubmittedFileName();
+            if(StringUtils.isNoneBlank(imageName)){
+                if(!imageName.endsWith("jpg")){
+                    req.setAttribute("errorResponse", "Підпис має бути у форматі \"jpg\"");
+                    doGet(req, resp);
+                }
+            } else {
+                req.setAttribute("errorResponse",
+                        "Для підтвердження надання довідки необхідно завантажити електронний підрис");
+                doGet(req, resp);
+            }
             InputStream fileContent = part.getInputStream();
             byte[] imageBytes = fileContent.readAllBytes();
 

@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
 
@@ -46,58 +47,67 @@
 
         <hr>
 
-        <h6 class="section-title bg-white text-center text-primary px-3">Заявки на надання довідок від здобувачів вищої освіти</h6>
-        <h1 class="mb-5"></h1>
-        <table class="table">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">Дата заявки</th>
-                <th scope="col">Місце подання</th>
-                <th scope="col">Опис причини</th>
-                <th scope="col">Студент</th>
-                <th scope="col">Спеціальність</th>
-                <th scope="col">Освітня програма</th>
-                <th scope="col">Група</th>
-                <th>Додати підпис</th>
-                <th>Підтвердити видачу</th>
-                <th>Відмовити видачу</th>
-            </tr>
-            </thead>
-            <c:forEach items="${waitingRequests}" var="element">
-                <tbody>
-                <tr>
-                    <fmt:parseDate value="${element.startDate}"  pattern="yyyy-MM-dd'T'HH:mm" var="parsedStartDate" type="both" />
-                    <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${parsedStartDate}" /></td>
-                    <td><c:out value="${element.reasonName}"/></td>
-                    <td><c:out value="${element.reasonDescription}"/></td>
-                    <td><c:out value="${element.studentFullName}"/></td>
-                    <td><c:out value="${element.specialityName}"/></td>
-                    <td><c:out value="${element.educationalProgram}"/></td>
-                    <td><c:out value="${element.groupName}"/></td>
-                    <form method="post" enctype="multipart/form-data">
-                        <td>
-                            <input type="file" id="signFile" name="signFile">
-                        </td>
-                        <td>
-                            <button type="submit" class="btn btn-primary btn-sm" value="<c:out value="${element.id}"/>" name="approveRequest">
-                                Підтвердити надання
-                            </button>
-                        </td>
-                    </form>
+        <p align="center" style="color:red;"><c:out value='${requestScope["errorResponse"]}'/></p>
 
-                    <td>
-                        <form method="post">
-                            <input type="text" id="deniedComment" class="form-control form-control-sm" name="deniedComment" placeholder="Причина"/>
-                            <input id="deniedRequestId" name="deniedRequestId" type="hidden" value="<c:out value = "${element.id}"/>">
-                            <button type="submit" class="btn btn-primary btn-sm" value="val" name="denyRequestButton">Відмовити надання</button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </c:forEach>
-        </table>
+        <c:choose>
+            <c:when test="${fn:length(waitingRequests) > 0}">
+                    <h6 class="section-title bg-white text-center text-primary px-3">Заявки на надання довідок від здобувачів вищої освіти</h6>
+                    <h1 class="mb-5"></h1>
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Дата заявки</th>
+                            <th scope="col">Місце подання</th>
+                            <th scope="col">Опис причини</th>
+                            <th scope="col">Студент</th>
+                            <th scope="col">Спеціальність</th>
+                            <th scope="col">Освітня програма</th>
+                            <th scope="col">Група</th>
+                            <th>Додати підпис</th>
+                            <th>Підтвердити видачу</th>
+                            <th>Відмовити видачу</th>
+                        </tr>
+                        </thead>
+                        <c:forEach items="${waitingRequests}" var="element">
+                            <tbody>
+                            <tr>
+                                <fmt:parseDate value="${element.startDate}"  pattern="yyyy-MM-dd'T'HH:mm" var="parsedStartDate" type="both" />
+                                <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${parsedStartDate}" /></td>
+                                <td><c:out value="${element.reasonName}"/></td>
+                                <td><c:out value="${element.reasonDescription}"/></td>
+                                <td><c:out value="${element.studentFullName}"/></td>
+                                <td><c:out value="${element.specialityName}"/></td>
+                                <td><c:out value="${element.educationalProgram}"/></td>
+                                <td><c:out value="${element.groupName}"/></td>
+                                <form method="post" enctype="multipart/form-data">
+                                    <td>
+                                        <input type="file" id="signFile" name="signFile">
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary btn-sm" value="<c:out value="${element.id}"/>" name="approveRequest">
+                                            Підтвердити надання
+                                        </button>
+                                    </td>
+                                </form>
+
+                                <td>
+                                    <form method="post">
+                                        <input type="text" id="deniedComment" class="form-control form-control-sm" name="deniedComment" placeholder="Причина"/>
+                                        <input id="deniedRequestId" name="deniedRequestId" type="hidden" value="<c:out value = "${element.id}"/>">
+                                        <button type="submit" class="btn btn-primary btn-sm" value="val" name="denyRequestButton">Відмовити надання</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </c:forEach>
+                    </table>
+            </c:when>
+            <c:otherwise>
+                <h6 class="bg-white text-center text-primary px-3">Немає чекаючих на розгляд запитів</h6>
+            </c:otherwise>
+        </c:choose>
+        </div>
     </div>
-</div>
 
 <jsp:include page="footer.jsp"/>
 
