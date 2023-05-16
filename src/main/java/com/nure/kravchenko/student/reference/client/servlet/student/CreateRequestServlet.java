@@ -36,6 +36,7 @@ public class CreateRequestServlet extends HttpServlet {
 
         List<ReasonDto> reasons = studentService.getAllRequestReasonsForStudent(token);
         req.setAttribute("reasons", reasons);
+        req.setAttribute("student", studentService.getStudentById((Long) session.getAttribute("userId"), token));
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/student_create_request.jsp");
         requestDispatcher.forward(req, resp);

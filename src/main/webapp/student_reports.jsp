@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
 
@@ -12,7 +13,8 @@
 <body>
 <jsp:include page="header_student.jsp"/>
 
-
+<c:choose>
+    <c:when test="${fn:length(requests) > 0}">
 <div class="container">
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
 
@@ -84,7 +86,11 @@
         </table>
     </div>
 </div>
-
+    </c:when>
+    <c:otherwise>
+        <h3 align="center">Немає наданих довідок</h3>
+    </c:otherwise>
+</c:choose>
 <jsp:include page="footer.jsp"/>
 
 <!-- Back to Top -->

@@ -13,6 +13,7 @@
       <a href="<c:out value="${request.requestURL}admin"/>" class="nav-item nav-link active">Профіль</a>
       <a href="<c:out value="${request.requestURL}adminApproveWorkers"/>" class="nav-item nav-link active">Заявки робітників деканату</a>
       <a href="<c:out value="${request.requestURL}adminShowWaitingStudents"/>" class="nav-item nav-link active">Заявки студентів</a>
+      <a href="<c:out value="${request.requestURL}adminSearchStudents"/>" class="nav-item nav-link active">Пошук студентів</a>
       <a href="<c:out value="${request.requestURL}adminCreation"/>" class="nav-item nav-link active">Створення</a>
       <a href="<c:out value="${request.requestURL}logout"/>" class="nav-item nav-link">Вийти</a>
     </div>

@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
 
@@ -12,6 +13,8 @@
 <body>
 <jsp:include page="header_admin.jsp"/>
 
+<c:choose>
+  <c:when test="${fn:length(waitingApprovalWorkers) > 0}">
 <div class="container">
   <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
     <h6 class="section-title bg-white text-center text-primary px-3">Робітники деканату, які чекають підтвердження реєстрації</h6>
@@ -67,11 +70,16 @@
     </table>
   </div>
 </div>
+  </c:when>
+  <c:otherwise>
+    <h3 align="center">Немає заявок на реєстрацію від працівників деканату</h3>
+  </c:otherwise>
+</c:choose>
 
 <jsp:include page="footer.jsp"/>
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+<a class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
 <!-- JavaScript Libraries -->

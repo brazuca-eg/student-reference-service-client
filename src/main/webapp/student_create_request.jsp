@@ -62,6 +62,12 @@
     </div>
 </div>
 
+<c:choose>
+    <c:when test="${student.active == false}">
+        <h3 align="center">Ви наразі не можете створити запит на отримання довідки, так як дійсний статус не дозволяє це зробити</h3>
+        <h3 align="center">Ваш дійсний статус: <c:out value="${student.statusDescription}"/></h3>
+    </c:when>
+</c:choose>
 
 <h3 align="center"><c:out value='${requestScope["response"]}'/></h3>
 

@@ -58,6 +58,16 @@ public class AdminService {
         return responseEntity.getBody();
     }
 
+    public List<StudentDto> getStudentsByGroup(String groupName, String token) {
+        ResponseEntity<List<StudentDto>> responseEntity = communication.getRestTemplate()
+                .exchange(communication.getStudentReferenceRestUrl() + "/admins/students/find?groupName=" + groupName,
+                        HttpMethod.GET, createHttpEntityWithAuthorizationToken(token),
+                        new ParameterizedTypeReference<List<StudentDto>>() {
+                        });
+
+        return responseEntity.getBody();
+    }
+
     public List<FacultyDto> getAllFaculties(String token) {
         ResponseEntity<List<FacultyDto>> responseEntity = communication.getRestTemplate()
                 .exchange(communication.getStudentReferenceRestUrl() + "/admins/faculties",
@@ -111,6 +121,20 @@ public class AdminService {
         ResponseEntity<StudentDto> responseEntity = communication.getRestTemplate()
                 .postForEntity(communication.getStudentReferenceRestUrl() + "/admins/students/" + id + "/approve",
                         approveWorkerDtoHttpEntity,
+                        StudentDto.class);
+
+        return responseEntity.getBody();
+    }
+
+    public StudentDto updateStudentStatus(Long id, UpdateStudentStatusDto studentStatusDto, String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", token);
+        HttpEntity<UpdateStudentStatusDto> updateStudentStatusDtoHttpEntity =
+                new HttpEntity<>(studentStatusDto, headers);
+
+        ResponseEntity<StudentDto> responseEntity = communication.getRestTemplate()
+                .postForEntity(communication.getStudentReferenceRestUrl() + "/admins/students/" + id + "/status",
+                        updateStudentStatusDtoHttpEntity,
                         StudentDto.class);
 
         return responseEntity.getBody();

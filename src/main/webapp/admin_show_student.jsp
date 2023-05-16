@@ -28,6 +28,8 @@
 
                     <p>Стать: <c:out value="${student.gender}"/></p>
 
+                    <h2>Дійсний статус: <c:out value="${student.statusDescription}"/></h2>
+
                     <c:choose>
                         <c:when test="${student.approved == false}">
                             <form method="post">
@@ -83,11 +85,35 @@
                             <h2>Профіль підтверджено</h2>
                         </c:otherwise>
                     </c:choose>
-
     </div>
 </div>
 
-
+<c:choose>
+    <c:when test="${student.active == true}">
+        <hr>
+        <div style="width: 30%;">
+        <h4>Змінити статус студента</h4>
+            <form method="post">
+                <p><input type="radio" id="activeFalse" name="activeFalse" value="false"></p>
+                <p><label for="activeFalse">Не активний студент</label></p>
+                <p>
+                    <select name="nonActiveReason" id="nonActiveReason" class="form-control">
+                        <c:forEach items="${nonActiveReasons}" var="element">
+                <h3><c:out value="${element}"/></h3>
+                <option value="<c:out value="${element}"/>"><c:out value="${element}"/></option>
+                </c:forEach>
+                </select>
+                </p>
+                <p><label for="studentGroup">Оберіть причину для зміни статусу</label> </p>
+                <p><input  type="date" name="endStatusDate" id="endStatusDate"></p>
+                <p> <label for="endStatusDate">Оберіть кінцеву дату, у разі, якщо така є</label></p>
+                <button type="submit" class="btn btn-primary btn-sm" value="change" name="changeStatusButton">
+                    Змінити
+                </button>
+            </form>
+        </div>
+    </c:when>
+</c:choose>
 
 <jsp:include page="footer.jsp"/>
 

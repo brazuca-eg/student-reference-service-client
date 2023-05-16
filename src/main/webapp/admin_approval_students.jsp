@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
 
@@ -12,6 +13,8 @@
 <body>
 <jsp:include page="header_admin.jsp"/>
 
+<c:choose>
+  <c:when test="${fn:length(waitingApprovalStudents) > 0}">
 <div class="container">
   <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
     <h6 class="section-title bg-white text-center text-primary px-3">Студенти, які чекають підтвердження реєстрації</h6>
@@ -35,22 +38,6 @@
           <td><c:out value="${element.surname}"/></td>
           <td><c:out value="${element.fatherhood}"/></td>
           <td><c:out value="${element.gender}"/></td>
-<%--          <form method="post">--%>
-<%--            <input type="hidden" value="<c:out value="${element.id}"/>" name="studentId" />--%>
-<%--            <td>--%>
-<%--              <select name="studentGroup" id="studentGroup" class="form-control">--%>
-<%--                <c:forEach items="${studentGroups}" var="element">--%>
-<%--                  <h3><c:out value="${element.name}"/></h3>--%>
-<%--                  <option value="<c:out value="${element.id}"/>"><c:out value="${element.name}"/></option>--%>
-<%--                </c:forEach>--%>
-<%--              </select>--%>
-<%--              <label for="studentGroup">Оберіть групу студента</label>--%>
-<%--            </td>--%>
-<%--            <td>--%>
-<%--              <button type="submit" value="submit" class="btn btn-primary btn-sm" name="approveStudentButton">Підтвердити реєстрацію</button>--%>
-<%--            </td>--%>
-<%--          </form>--%>
-
           <td>
             <a href="<c:out value="${request.requestURL}adminShowStudent/"/><c:out value="${element.id}"/>" class="nav-item nav-link">Подивитися</a>
           </td>
@@ -60,11 +47,16 @@
     </table>
   </div>
 </div>
+  </c:when>
+  <c:otherwise>
+    <h3 align="center">Немає заявок на реєстрацію від здобувачів вищої освіти</h3>
+  </c:otherwise>
+</c:choose>
 
 <jsp:include page="footer.jsp"/>
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+<a class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
 <!-- JavaScript Libraries -->

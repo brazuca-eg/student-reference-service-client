@@ -37,14 +37,20 @@
                 </h5>
                 <p>Поштовий акаунт ХНУРЕ: <c:out value="${current.email}"/></p>
                 <p>Стать: <c:out value="${current.gender}"/></p>
-                <p>Факультет: <c:out value="${uniInfo.facultyName}"/></p>
-                <p>Спеціальність: <c:out value="${uniInfo.specialityName}"/></p>
-                <p>Освітня програма: <c:out value="${uniInfo.educationalProgram}"/></p>
-                <p>Група: <c:out value="${uniInfo.groupName}"/></p>
-                <p>Дата початку навчання у групі: <c:out value="${uniInfo.groupStartYear}"/></p>
-                <p>Дата закінчення навчання у групі: <c:out value="${uniInfo.groupEndYear}"/></p>
-                <p>Форма навчання: <c:out value="${uniInfo.learnForm}"/></p>
-                <p>Ступінь освіти, який набувається: <c:out value="${uniInfo.degreeForm}"/></p>
+                <p>Дійсний статус особи: <c:out value="${current.statusDescription}"/></p>
+                <c:choose>
+                    <c:when test="${current.active == true}">
+                        <p>Факультет: <c:out value="${uniInfo.facultyName}"/></p>
+                        <p>Спеціальність: <c:out value="${uniInfo.specialityName}"/></p>
+                        <p>Освітня програма: <c:out value="${uniInfo.educationalProgram}"/></p>
+                        <p>Група: <c:out value="${uniInfo.groupName}"/></p>
+                        <p>Дата початку навчання у групі: <c:out value="${uniInfo.groupStartYear}"/></p>
+                        <p>Дата закінчення навчання у групі: <c:out value="${uniInfo.groupEndYear}"/></p>
+                        <p>Форма навчання: <c:out value="${uniInfo.learnForm}"/></p>
+                        <p>Ступінь освіти, який набувається: <c:out value="${uniInfo.degreeForm}"/></p>
+                    </c:when>
+                </c:choose>
+
             </div>
         </div>
     </div>
@@ -53,7 +59,7 @@
 <jsp:include page="footer.jsp"/>
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+<a href="" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
 <!-- JavaScript Libraries -->
