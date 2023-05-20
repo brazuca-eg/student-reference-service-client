@@ -27,14 +27,14 @@
                         <div class="col-12">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="serialNumber" name="serialNumber"
-                                       placeholder="Серійний номер студентського квитка"/>
+                                       placeholder="Серійний номер студентського квитка" required/>
                                 <label for="serialNumber">Серійний номер студентського квитка</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="number" name="number"
-                                       placeholder="Номер студентського квитка"></p>
+                                       placeholder="Номер студентського квитка" required></p>
                                 <label for="number">Номер студентського квитка</label>
                             </div>
                         </div>

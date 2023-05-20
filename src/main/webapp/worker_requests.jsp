@@ -81,7 +81,7 @@
                                 <td><c:out value="${element.groupName}"/></td>
                                 <form method="post" enctype="multipart/form-data">
                                     <td>
-                                        <input type="file" id="signFile" name="signFile">
+                                        <input type="file" id="signFile" name="signFile" required>
                                     </td>
                                     <td>
                                         <button type="submit" class="btn btn-primary btn-sm" value="<c:out value="${element.id}"/>" name="approveRequest">

@@ -2,6 +2,7 @@ package com.nure.kravchenko.student.reference.client.servlet.auth;
 
 import com.nure.kravchenko.student.reference.client.payload.RegistrationDto;
 import com.nure.kravchenko.student.reference.client.service.AuthService;
+import com.nure.kravchenko.student.reference.client.service.utils.ValidationUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 @WebServlet("/register")
@@ -37,18 +39,19 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         if (Objects.nonNull(req.getParameter("submitButton"))) {
-            String password1 = req.getParameter("password");
-            String password2 = req.getParameter("password2");
-            if (!StringUtils.equals(password1, password2)) {
-                req.setAttribute("error", "Passwords should match with each other");
-                doGet(req, resp);
-            }
             RegistrationDto registrationDto = new RegistrationDto();
             registrationDto.setEmail(req.getParameter("email"));
-            registrationDto.setPassword(password1);
             registrationDto.setName(req.getParameter("name"));
             registrationDto.setSurname(req.getParameter("surname"));
             registrationDto.setFatherhood(req.getParameter("fatherhood"));
+            String password1 = req.getParameter("password");
+            String password2 = req.getParameter("password2");
+            if (!StringUtils.equals(password1, password2)) {
+                req.setAttribute("errorResponse", "Паролі мають буди ідентичними");
+                doGet(req, resp);
+                return;
+            }
+            registrationDto.setPassword(password1);
             char gender = 'M';
             if (StringUtils.equalsIgnoreCase(req.getParameter("gender"), "Female")) {
                 gender = 'F';
@@ -60,11 +63,22 @@ public class RegistrationServlet extends HttpServlet {
             }
             registrationDto.setRole(role);
 
+            List<String> validationMessages = ValidationUtil.validateRegistration(registrationDto);
+            if(!validationMessages.isEmpty()){
+                String errorResponse = StringUtils.EMPTY;
+                for (String validationMessage : validationMessages) {
+                    errorResponse = errorResponse.concat(validationMessage);
+                }
+                req.setAttribute("errorResponse", errorResponse);
+                doGet(req, resp);
+                return;
+            }
+
             boolean registerResult = authService.register(registrationDto);
             if (registerResult) {
                 resp.sendRedirect(req.getContextPath() + "/login");
             } else {
-                req.setAttribute("error", "Error while creating");
+                req.setAttribute("error", "Проблеми з реєстрацією");
                 doGet(req, resp);
             }
         }

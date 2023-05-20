@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (Objects.nonNull(req.getParameter("submitButton"))) {
             if (StringUtils.isBlank(req.getParameter("email")) || StringUtils.isBlank(req.getParameter("password"))) {
-                req.setAttribute("error", "All fields should be entered for login operation");
+                req.setAttribute("errorResponse", "Ви повинні запомнити всі поля.");
                 doGet(req, resp);
             } else {
                 LoginDto loginDto = new LoginDto();
@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 
                 UserLoggedInDto userLoggedInDto = authService.login(loginDto);
                 if (Objects.isNull(userLoggedInDto)) {
-                    req.setAttribute("error", "No user with such params");
+                    req.setAttribute("errorResponse", "Немає користувача з такими даними логіну.");
                     doGet(req, resp);
                 } else {
                     boolean isApprovedAccount = userLoggedInDto.isApproved();

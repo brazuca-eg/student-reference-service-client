@@ -39,22 +39,22 @@
                     <form action="#" method="post">
                         Email
                         <input type="text" id="email" name="email" class="form-control border-3 w-75 p-3"
-                               placeholder="Введіть вашу пошту" required oninvalid="this.setCustomValidity('Email повинен бути заповненим')">
+                               placeholder="Введіть вашу пошту" required>
                         Пароль
                         <input type="password" id="password" name="password" class="form-control border-3 w-75 p-3"
-                               placeholder="Введіть пароль" required oninvalid="this.setCustomValidity('Пароль повинен бути заповненим')">
+                               placeholder="Введіть пароль" required>
                         Повторіть пароль
                         <input type="password" id="password2" name="password2" class="form-control border-3 w-75 p-3"
-                               placeholder="Повторіть пароль" placeholder="Введіть пароль" required oninvalid="this.setCustomValidity('Пароль повинен бути заповненим')">
+                               placeholder="Повторіть пароль" placeholder="Введіть пароль" required>
                         Ім'я
                         <input type="text" id="name" name="name" class="form-control border-3 w-75 p-3"
-                               placeholder="Введіть ім'я" placeholder="Введіть пароль" required oninvalid="this.setCustomValidity('Ім\'я повинно бути заповненим')">
+                               placeholder="Введіть ім'я" placeholder="Введіть пароль" required>
                         Прізвище
                         <input type="text" id="surname" name="surname" class="form-control border-3 w-75 p-3"
-                               placeholder="Введіть прізвище" required oninvalid="this.setCustomValidity('Прізвище повинно бути заповненим')">
+                               placeholder="Введіть прізвище" required>
                         Ім'я по батькові
                         <input type="text" id="fatherhood" name="fatherhood" class="form-control border-3 w-75 p-3"
-                               placeholder="Введіть ім'я по батькові"  required oninvalid="this.setCustomValidity('Ім\'я по батькові повинно бути заповненим')">
+                               placeholder="Введіть ім'я по батькові"  required>
                         <p>Оберіть вашу стать</p>
                         <input type="radio" id="gender_m" name="gender" value="Male">
                         <label for="gender_m">Чоловік</label><br>

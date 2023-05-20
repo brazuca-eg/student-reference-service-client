@@ -39,7 +39,7 @@ public class AppExceptionHandler extends HttpServlet {
             statusCode = exception.getRawStatusCode();
             String serverFullMsg = exception.getMessage();
             int start = serverFullMsg.indexOf('{');
-            int end = serverFullMsg.indexOf('}') + 1;
+            int end = serverFullMsg.lastIndexOf('}') + 1;
             Gson gson = new Gson();
             ErrorResponse errorResponse = gson.fromJson(serverFullMsg.substring(start, end), ErrorResponse.class);
             userMsg = errorResponse.getErrorDescription();

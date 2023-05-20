@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
@@ -59,10 +60,10 @@
                 <div class="row gy-2 gx-4 mb-4">
                     <form method="post">
                         Email
-                        <input type="text" id="email" name="email" required oninvalid="this.setCustomValidity('Email повинен бути заповненим')" class="form-control border-3 w-75 p-3"
+                        <input type="text" id="email" name="email" required class="form-control border-3 w-75 p-3"
                                placeholder="Введіть вашу пошту">
                         Пароль
-                        <input type="password" id="password" name="password" required oninvalid="this.setCustomValidity('Пароль повинен бути заповненим')" class="form-control border-3 w-75 p-3"
+                        <input type="password" id="password" name="password" required class="form-control border-3 w-75 p-3"
                                placeholder="Введіть ваш пароль">
 
                         <button type="submit" value="submit" name="submitButton" class="btn btn-primary py-3 px-5 mt-2">
