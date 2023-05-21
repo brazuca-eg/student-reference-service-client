@@ -1,8 +1,10 @@
 package com.nure.kravchenko.student.reference.client.service.utils;
 
 import com.nure.kravchenko.student.reference.client.payload.RegistrationDto;
+import com.nure.kravchenko.student.reference.client.payload.UpdateStudentTicketDto;
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -63,6 +65,30 @@ public class ValidationUtil {
         }
 
         return validateMessages;
+    }
+
+    public static String validateStudentTicket(UpdateStudentTicketDto ticketDto) {
+        List<String> validateMessages = new ArrayList<>();
+        String changedSerialNumber = ticketDto.getSerialNumber();
+        String changedNumber = ticketDto.getNumber();
+        LocalDate changedStartDate = ticketDto.getStartDate();
+        LocalDate changedEndDate = ticketDto.getEndDate();
+
+        if(changedNumber.length() < 8 || changedNumber.length() > 12){
+            validateMessages.add("Номер квитка має невідповідну кількість символів. ");
+        }
+        if(changedSerialNumber.length() != TWO_CHARS_NUM){
+            validateMessages.add("Серійний номер квитка має складатися з 2 символів. ");
+        }
+
+        if(!validateMessages.isEmpty()) {
+            String errorResponse = StringUtils.EMPTY;
+            for (String validationMessage : validateMessages) {
+                errorResponse = errorResponse.concat(validationMessage);
+            }
+            return errorResponse;
+        }
+        return StringUtils.EMPTY;
     }
 
 }

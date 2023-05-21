@@ -2,9 +2,12 @@ package com.nure.kravchenko.student.reference.client.servlet.admin;
 
 import com.nure.kravchenko.student.reference.client.payload.ApproveStudentRegisterDto;
 import com.nure.kravchenko.student.reference.client.payload.UpdateStudentStatusDto;
+import com.nure.kravchenko.student.reference.client.payload.UpdateStudentTicketDto;
 import com.nure.kravchenko.student.reference.client.server.StudentDto;
 import com.nure.kravchenko.student.reference.client.server.StudentGroupDto;
 import com.nure.kravchenko.student.reference.client.service.AdminService;
+import com.nure.kravchenko.student.reference.client.service.utils.ValidationUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -107,6 +110,29 @@ public class WatchStudentServlet extends HttpServlet {
             Long groupId = Long.valueOf(req.getParameter("changedGroup"));
 
             adminService.updateGroupForStudent(studentId, groupId , token);
+
+            doGet(req, resp);
+        }
+
+        if (Objects.nonNull(req.getParameter("changeTicketButton"))) {
+            String changedSerialNumber = req.getParameter("changedSerialNumber");
+            String changedNumber = req.getParameter("changedNumber");
+            LocalDate changedStartDate = LocalDate.parse(req.getParameter("changedStartDate"));
+            LocalDate changedEndDate = LocalDate.parse(req.getParameter("changedEndDate"));
+            UpdateStudentTicketDto updateStudentTicketDto = UpdateStudentTicketDto.builder()
+                    .number(changedNumber)
+                    .serialNumber(changedSerialNumber)
+                    .startDate(changedStartDate)
+                    .endDate(changedEndDate)
+                    .build();
+
+            String validatedMessage = ValidationUtil.validateStudentTicket(updateStudentTicketDto);
+            if(StringUtils.isNotBlank(validatedMessage)){
+                req.setAttribute("errorResponse", validatedMessage);
+                doGet(req, resp);
+                return;
+            }
+            adminService.updateStudentTicket(studentId, updateStudentTicketDto , token);
 
             doGet(req, resp);
         }

@@ -148,6 +148,20 @@ public class AdminService {
         return responseEntity.getBody();
     }
 
+    public StudentDto updateStudentTicket(Long id, UpdateStudentTicketDto updateStudentTicketDto, String token){
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", token);
+        HttpEntity<UpdateStudentTicketDto> updateStudentStatusDtoHttpEntity =
+                new HttpEntity<>(updateStudentTicketDto, headers);
+
+        ResponseEntity<StudentDto> responseEntity = communication.getRestTemplate()
+                .postForEntity(communication.getStudentReferenceRestUrl() + "/admins/students/" + id + "/ticket",
+                        updateStudentStatusDtoHttpEntity,
+                        StudentDto.class);
+
+        return responseEntity.getBody();
+    }
+
     public Boolean updateGroupForStudent(Long studentId, Long groupId, String token) {
         ResponseEntity<Boolean> responseEntity = communication.getRestTemplate().exchange(
                 communication.getStudentReferenceRestUrl() + "/admins/students/" + studentId + "/" + groupId,
