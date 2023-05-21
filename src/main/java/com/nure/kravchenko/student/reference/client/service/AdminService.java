@@ -37,6 +37,14 @@ public class AdminService {
         return responseEntity.getBody();
     }
 
+    public StudentGroupDto getGroupByStudentId(Long id, String token) {
+        ResponseEntity<StudentGroupDto> responseEntity = communication.getRestTemplate()
+                .exchange(communication.getStudentReferenceRestUrl() + "/admins/students/" + id + "/group",
+                        HttpMethod.GET, createHttpEntityWithAuthorizationToken(token), StudentGroupDto.class);
+
+        return responseEntity.getBody();
+    }
+
 
     public List<WorkerDto> getWaitingApproveWorkers(String token) {
         ResponseEntity<List<WorkerDto>> responseEntity = communication.getRestTemplate()
@@ -136,6 +144,14 @@ public class AdminService {
                 .postForEntity(communication.getStudentReferenceRestUrl() + "/admins/students/" + id + "/status",
                         updateStudentStatusDtoHttpEntity,
                         StudentDto.class);
+
+        return responseEntity.getBody();
+    }
+
+    public Boolean updateGroupForStudent(Long studentId, Long groupId, String token) {
+        ResponseEntity<Boolean> responseEntity = communication.getRestTemplate().exchange(
+                communication.getStudentReferenceRestUrl() + "/admins/students/" + studentId + "/" + groupId,
+                HttpMethod.POST, createHttpEntityWithAuthorizationToken(token), Boolean.class);
 
         return responseEntity.getBody();
     }

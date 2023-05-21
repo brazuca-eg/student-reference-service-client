@@ -37,11 +37,18 @@ public class WatchStudentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String token = (String) session.getAttribute("token");
+        req.setCharacterEncoding("UTF-8");
 
         Long studentId = Long.valueOf(req.getPathInfo().substring(1));
 
         StudentDto studentDto = adminService.getStudentById(studentId, token);
         req.setAttribute("student", studentDto);
+
+        if (studentDto.isApproved()) {
+            req.setAttribute("studentGroup", adminService.getGroupByStudentId(studentId, token));
+        } else {
+            req.setAttribute("studentGroup", "Не додано");
+        }
 
         List<StudentGroupDto> studentGroups = adminService.getAllGroups(token);
         req.setAttribute("studentGroups", studentGroups);
@@ -59,9 +66,9 @@ public class WatchStudentServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         String token = (String) session.getAttribute("token");
+        Long studentId = Long.valueOf(req.getPathInfo().substring(1));
 
         if (Objects.nonNull(req.getParameter("approveStudentButton"))) {
-            Long studentId = Long.valueOf(req.getPathInfo().substring(1));
             String groupName = req.getParameter("studentGroup");
             String serialNumber = req.getParameter("serialNumber");
             String number = req.getParameter("number");
@@ -92,6 +99,14 @@ public class WatchStudentServlet extends HttpServlet {
                     .build();
             adminService.updateStudentStatus(Long.valueOf(req.getPathInfo().substring(1)),
                     updateStudentStatusDto, token);
+
+            doGet(req, resp);
+        }
+
+        if (Objects.nonNull(req.getParameter("changeGroupButton"))) {
+            Long groupId = Long.valueOf(req.getParameter("changedGroup"));
+
+            adminService.updateGroupForStudent(studentId, groupId , token);
 
             doGet(req, resp);
         }

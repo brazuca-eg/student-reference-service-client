@@ -14,7 +14,7 @@
 <div class="col-lg-3 col-md-6; align-items-center" style="margin:0 auto;">
   <h4 style="color: #181d38">Пошук студентів</h4>
   <form method="get">
-    <div class="position-relative mx-auto" style="max-width: 450px;">
+    <div  style="max-width: 450px;">
 
       <div class="form-check">
         <select name="studentGroup" id="studentGroup" class="form-control">
@@ -27,7 +27,7 @@
         <label for="studentGroup">Оберіть потрібну групу</label>
       </div>
 
-      <p><button type="submit" value="search" name="searchButton" class="btn btn-primary btn-sm">Пошук</button></p>
+      <button type="submit" value="search" name="searchButton" class="btn btn-primary btn-sm">Пошук</button>
     </div>
 
   </form>
