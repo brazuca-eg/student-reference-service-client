@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 @Log4j
-@WebFilter(filterName = "security")
+@WebFilter(filterName = "security", urlPatterns = {"/student/*", "/admin/*", "/worker/*", "/login/*", "/register/*"})
 public class SecurityFilter implements Filter {
 
-    public static final String ERROR_403 = "error_403.html";
+    public static final String ERROR_403 = "error_403.jsp";
 
     @Override
     public void init(FilterConfig filterConfig) {
@@ -31,7 +31,7 @@ public class SecurityFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         Long id = (Long) req.getSession().getAttribute("userId");
         String role = (String) req.getSession().getAttribute("role");
-        String currentUrl = req.getRequestURL().toString();
+        String currentUrl = ((HttpServletRequest) servletRequest).getRequestURI();
         if (id == null) {
             if (!currentUrl.contains("login") && !currentUrl.contains("register")) {
                 servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);
@@ -42,14 +42,17 @@ public class SecurityFilter implements Filter {
             if (StringUtils.containsIgnoreCase(currentUrl, Role.WORKER.name()) ||
                     StringUtils.containsIgnoreCase(currentUrl, Role.ADMIN.name())) {
                 servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);
+                return;
             }
         } else if (role.equalsIgnoreCase(Role.WORKER.name())) {
             if (!StringUtils.containsIgnoreCase(currentUrl, Role.WORKER.name())) {
                 servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);
+                return;
             }
         } else if (role.equalsIgnoreCase(Role.ADMIN.name())) {
             if (!StringUtils.containsIgnoreCase(currentUrl, Role.ADMIN.name())) {
                 servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);
+                return;
             }
         }
         filterChain.doFilter(servletRequest, servletResponse);
