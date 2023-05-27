@@ -1,6 +1,7 @@
 package com.nure.kravchenko.student.reference.client.filter;
 
 import com.nure.kravchenko.student.reference.client.model.Role;
+import com.nure.kravchenko.student.reference.client.model.Student;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -32,13 +33,24 @@ public class SecurityFilter implements Filter {
         Long id = (Long) req.getSession().getAttribute("userId");
         String role = (String) req.getSession().getAttribute("role");
         String currentUrl = ((HttpServletRequest) servletRequest).getRequestURI();
+        boolean isApprovedAccount = false;
+        if(Objects.nonNull(req.getSession().getAttribute("isApprovedAccount"))){
+            isApprovedAccount = (Boolean) req.getSession().getAttribute("isApprovedAccount");
+        }
         if (id == null) {
             if (!currentUrl.contains("login") && !currentUrl.contains("register")) {
                 servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);
+                return;
             }
         } else if (Objects.isNull(role) && currentUrl.contains("logout")) {
             servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);
-        } else if (role.equalsIgnoreCase(Role.STUDENT.name())) {
+            return;
+        } else if(!isApprovedAccount && (!StringUtils.containsIgnoreCase(currentUrl, "waiting")) ||
+                !StringUtils.containsIgnoreCase(currentUrl, "logout")){
+            servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);
+            return;
+        }
+        else if (role.equalsIgnoreCase(Role.STUDENT.name())) {
             if (StringUtils.containsIgnoreCase(currentUrl, Role.WORKER.name()) ||
                     StringUtils.containsIgnoreCase(currentUrl, Role.ADMIN.name())) {
                 servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);

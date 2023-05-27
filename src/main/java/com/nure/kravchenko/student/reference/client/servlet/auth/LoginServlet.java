@@ -66,6 +66,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("role", role);
                     session.setAttribute("userId", userLoggedInDto.getId());
                     session.setAttribute("token", userLoggedInDto.getToken());
+                    session.setAttribute("isApprovedAccount", isApprovedAccount);
                     if (StringUtils.equalsIgnoreCase(Role.STUDENT.name(), role)) {
                         if (isApprovedAccount) {
                             resp.sendRedirect(req.getContextPath() + STUDENT_MAIN);
