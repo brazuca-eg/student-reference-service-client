@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.STUDENT_REQUESTS_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.STUDENT_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.STUDENT_REQUESTS;
 
@@ -42,7 +43,7 @@ public class StudentRequestsServlet extends HttpServlet {
                 .getRequestForStudent(id, RequestType.NEW, StringUtils.EMPTY, token);
         req.setAttribute("studentRequests", studentRequests);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/student_requests.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(STUDENT_REQUESTS_PAGE);
         requestDispatcher.forward(req, resp);
     }
 

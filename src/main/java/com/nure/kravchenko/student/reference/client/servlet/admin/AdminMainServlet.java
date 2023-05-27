@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.ADMIN_MAIN_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.ADMIN_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.ADMIN_MAIN;
 
@@ -41,7 +42,7 @@ public class AdminMainServlet extends HttpServlet {
             req.setAttribute("current", workerDto);
         }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/admin_main.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(ADMIN_MAIN_PAGE);
         requestDispatcher.forward(req, resp);
     }
 

@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.ADMIN_FIND_STUDENTS_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.ADMIN_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.ADMIN_SEARCH_STUDENTS;
 
@@ -56,7 +57,7 @@ public class FindStudentServlet extends HttpServlet {
     }
 
     private void redirect(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/admin_find_students.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(ADMIN_FIND_STUDENTS_PAGE);
         requestDispatcher.forward(req, resp);
     }
 }

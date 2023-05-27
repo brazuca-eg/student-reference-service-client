@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.AUTH_REGISTER_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.AUTH_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.AUTH_LOGIN;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.AUTH_REGISTER;
@@ -35,7 +36,7 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/register.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(AUTH_REGISTER_PAGE);
         requestDispatcher.forward(req, resp);
     }
 

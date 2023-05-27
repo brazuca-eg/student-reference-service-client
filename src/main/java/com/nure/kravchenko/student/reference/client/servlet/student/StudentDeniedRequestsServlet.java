@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.STUDENT_DENIED_REQUESTS_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.STUDENT_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.STUDENT_DENIED_REQUESTS;
 
@@ -42,7 +43,7 @@ public class StudentDeniedRequestsServlet extends HttpServlet {
                 .getRequestForStudent(id, RequestType.DENIED, StringUtils.EMPTY, token);
         req.setAttribute("studentDeniedRequests", studentDeniedRequests);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/student_denied_requests.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(STUDENT_DENIED_REQUESTS_PAGE);
         requestDispatcher.forward(req, resp);
     }
 }

@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.ADMIN_APPROVAL_WORKERS_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.ADMIN_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.ADMIN_APPROVE_WORKERS;
 
@@ -44,7 +45,7 @@ public class ApproveWorkersServlet extends HttpServlet {
         List<FacultyDto> faculties = adminService.getAllFaculties(token);
         req.setAttribute("faculties", faculties);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/admin_approval_workers.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(ADMIN_APPROVAL_WORKERS_PAGE);
         requestDispatcher.forward(req, resp);
     }
 

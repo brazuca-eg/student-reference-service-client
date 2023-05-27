@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.WORKER_REPORTS_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.WORKER_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.WORKER_REPORTS;
 
@@ -54,7 +55,7 @@ public class WorkerReportsServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/worker_reports.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(WORKER_REPORTS_PAGE);
         requestDispatcher.forward(req, resp);
     }
 }

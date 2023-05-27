@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.WORKER_DENIED_REPORTS_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.WORKER_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.WORKER_DENIED_REQUESTS;
 
@@ -40,7 +41,7 @@ public class WorkerDeniedReportsServlet extends HttpServlet {
                 .getAssignedWorkerRequests(id, false, null, token);
         req.setAttribute("assignedDeniedReports", assignedDeniedReports);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/worker_denied_reports.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(WORKER_DENIED_REPORTS_PAGE);
         requestDispatcher.forward(req, resp);
     }
 }

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.STUDENT_CREATE_REQUEST_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.STUDENT_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.STUDENT_CREATE_REQUEST;
 
@@ -42,7 +43,7 @@ public class CreateRequestServlet extends HttpServlet {
         req.setAttribute("reasons", reasons);
         req.setAttribute("student", studentService.getStudentById((Long) session.getAttribute("userId"), token));
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/student_create_request.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(STUDENT_CREATE_REQUEST_PAGE);
         requestDispatcher.forward(req, resp);
     }
 

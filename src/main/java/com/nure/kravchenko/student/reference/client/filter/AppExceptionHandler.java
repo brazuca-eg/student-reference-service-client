@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.AUTH_LOGIN_PAGE;
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.AUTH_REGISTER_PAGE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.AUTH_LOGIN;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.AUTH_REGISTER;
+
 @WebServlet("/AppExceptionHandler")
 public class AppExceptionHandler extends HttpServlet {
 
@@ -48,12 +53,12 @@ public class AppExceptionHandler extends HttpServlet {
         if (statusCode == 400) {
             request.setAttribute("errorResponse", userMsg);
 
-            if (previousPath.substring(slashIndex).equals("/login")) {
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+            if (previousPath.substring(slashIndex).equals(AUTH_LOGIN)) {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher(AUTH_LOGIN_PAGE);
                 requestDispatcher.forward(request, response);
             }
-            if (previousPath.substring(slashIndex).equals("/register")) {
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/register.jsp");
+            if (previousPath.substring(slashIndex).equals(AUTH_REGISTER)) {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher(AUTH_REGISTER_PAGE);
                 requestDispatcher.forward(request, response);
             }
         }
@@ -67,8 +72,8 @@ public class AppExceptionHandler extends HttpServlet {
         if (statusCode == 404) {
             request.setAttribute("errorResponse", userMsg);
 
-            if (previousPath.substring(slashIndex).equals("/login")) {
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+            if (previousPath.substring(slashIndex).equals(AUTH_LOGIN)) {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher(AUTH_LOGIN_PAGE);
                 requestDispatcher.forward(request, response);
             }
         }

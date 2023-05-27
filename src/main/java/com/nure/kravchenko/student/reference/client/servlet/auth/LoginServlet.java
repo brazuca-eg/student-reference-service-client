@@ -17,9 +17,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.AUTH_LOGIN_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.AUTH_SERVICE;
-import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.ADMIN_MAIN;
-import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.AUTH_LOGIN;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.*;
 
 @WebServlet(AUTH_LOGIN)
 public class LoginServlet extends HttpServlet {
@@ -37,10 +37,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (Objects.nonNull(req.getParameter("registerButton"))) {
-            resp.sendRedirect(req.getContextPath() + "/register");
+            resp.sendRedirect(req.getContextPath() + AUTH_REGISTER);
         }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/login.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(AUTH_LOGIN_PAGE);
         requestDispatcher.forward(req, resp);
     }
 
@@ -68,18 +68,18 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("token", userLoggedInDto.getToken());
                     if (StringUtils.equalsIgnoreCase(Role.STUDENT.name(), role)) {
                         if (isApprovedAccount) {
-                            resp.sendRedirect(req.getContextPath() + "/student");
+                            resp.sendRedirect(req.getContextPath() + STUDENT_MAIN);
                         }
                     } else if (StringUtils.equalsIgnoreCase(Role.WORKER.name(), role)) {
                         if (isApprovedAccount) {
-                            resp.sendRedirect(req.getContextPath() + "/worker");
+                            resp.sendRedirect(req.getContextPath() + WORKER_MAIN);
                         }
                     } else if (StringUtils.equalsIgnoreCase(Role.ADMIN.name(), role)) {
                         resp.sendRedirect(req.getContextPath() + ADMIN_MAIN);
                     }
 
                     if (!isApprovedAccount) {
-                        resp.sendRedirect(req.getContextPath() + "/waiting");
+                        resp.sendRedirect(req.getContextPath() + WAITING_PATH);
                     }
                 }
             }

@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.ADMIN_CREATE_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.ADMIN_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.ADMIN_CREATION;
 
@@ -47,7 +48,7 @@ public class CreationServlet extends HttpServlet {
         List<SpecialityDto> specialities = adminService.getAllSpecialities(token);
         req.setAttribute("specialities", specialities);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/admin_create.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(ADMIN_CREATE_PAGE);
         requestDispatcher.forward(req, resp);
     }
 

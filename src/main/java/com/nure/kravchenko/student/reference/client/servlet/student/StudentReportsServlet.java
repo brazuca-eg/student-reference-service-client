@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.STUDENT_REPORTS_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.STUDENT_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.DOWNLOAD_PATH;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.STUDENT_REPORTS;
@@ -55,7 +56,7 @@ public class StudentReportsServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/student_reports.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(STUDENT_REPORTS_PAGE);
         requestDispatcher.forward(req, resp);
     }
 

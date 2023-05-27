@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.WORKER_REQUESTS_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.WORKER_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.DOWNLOAD_PATH;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.WORKER_REQUESTS;
@@ -36,7 +37,6 @@ public class WorkerRequestServlet extends HttpServlet {
         ServletContext ctx = getServletContext();
         this.workerService = (WorkerService) ctx.getAttribute(WORKER_SERVICE);
     }
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -62,7 +62,7 @@ public class WorkerRequestServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/worker_requests.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(WORKER_REQUESTS_PAGE);
         requestDispatcher.forward(req, resp);
     }
 

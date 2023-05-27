@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.WORKER_MAIN_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.WORKER_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.WORKER_MAIN;
 
@@ -44,7 +45,7 @@ public class WorkerMainServlet extends HttpServlet {
             req.setAttribute("faculty", facultyDto);
         }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/worker_main.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(WORKER_MAIN_PAGE);
         requestDispatcher.forward(req, resp);
     }
 

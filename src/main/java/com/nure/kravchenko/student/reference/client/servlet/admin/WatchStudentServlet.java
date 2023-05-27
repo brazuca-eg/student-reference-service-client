@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.ADMIN_SHOW_STUDENT_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.ADMIN_SERVICE;
 
 @WebServlet("/adminShowStudent/*")
@@ -61,7 +62,7 @@ public class WatchStudentServlet extends HttpServlet {
         List<String> nonActiveReasons = Arrays.asList("Академічна відпустка", "Відраховано", "Зміна освітньої форми");
         req.setAttribute("nonActiveReasons", nonActiveReasons);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/admin_show_student.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(ADMIN_SHOW_STUDENT_PAGE);
         requestDispatcher.forward(req, resp);
     }
 

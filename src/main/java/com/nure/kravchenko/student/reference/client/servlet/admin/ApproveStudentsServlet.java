@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.ADMIN_APPROVAL_STUDENTS_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.ADMIN_SERVICE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.ADMIN_SHOW_WAITING_STUDENTS;
 
@@ -43,7 +44,7 @@ public class ApproveStudentsServlet extends HttpServlet {
         req.setAttribute("studentGroups", studentGroups);
 
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/admin_approval_students.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(ADMIN_APPROVAL_STUDENTS_PAGE);
         requestDispatcher.forward(req, resp);
     }
 
