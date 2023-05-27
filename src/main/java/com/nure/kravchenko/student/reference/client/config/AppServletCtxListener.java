@@ -11,13 +11,10 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.*;
+
 @WebListener
 public class AppServletCtxListener implements ServletContextListener {
-
-    private static final String AUTH_SERVICE = "authService";
-    private static final String STUDENT_SERVICE = "studentService";
-    private static final String WORKER_SERVICE = "workerService";
-    private static final String ADMIN_SERVICE = "adminService";
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {

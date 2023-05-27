@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/logout")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.AUTH_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.AUTH_LOGIN;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.AUTH_LOGOUT;
+
+@WebServlet(AUTH_LOGOUT)
 public class LogoutServlet extends HttpServlet {
 
     private static final long serialVersionUID = -3149824078466009445L;
@@ -21,7 +25,7 @@ public class LogoutServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.authService = (AuthService) ctx.getAttribute("authService");
+        this.authService = (AuthService) ctx.getAttribute(AUTH_SERVICE);
     }
 
     @Override
@@ -34,7 +38,7 @@ public class LogoutServlet extends HttpServlet {
         session.removeAttribute("userId");
         session.removeAttribute("token");
 
-        response.sendRedirect(request.getContextPath() + "/login");
+        response.sendRedirect(request.getContextPath() + AUTH_LOGIN);
     }
 
     protected void doGet(HttpServletRequest request,

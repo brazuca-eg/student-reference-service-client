@@ -16,7 +16,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet("/studentReports")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.STUDENT_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.DOWNLOAD_PATH;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.STUDENT_REPORTS;
+
+@WebServlet(STUDENT_REPORTS)
 public class StudentReportsServlet extends HttpServlet {
 
     private static final long serialVersionUID = -8813076739764130476L;
@@ -26,7 +30,7 @@ public class StudentReportsServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.studentService = (StudentService) ctx.getAttribute("studentService");
+        this.studentService = (StudentService) ctx.getAttribute(STUDENT_SERVICE);
     }
 
     @Override
@@ -47,7 +51,7 @@ public class StudentReportsServlet extends HttpServlet {
             String s3FileName = req.getParameter("s3FileName");
             req.getSession().setAttribute("s3FileName", s3FileName);
             RequestDispatcher dispatcher = getServletContext()
-                    .getRequestDispatcher("/download");
+                    .getRequestDispatcher(DOWNLOAD_PATH);
             dispatcher.forward(req, resp);
         }
 

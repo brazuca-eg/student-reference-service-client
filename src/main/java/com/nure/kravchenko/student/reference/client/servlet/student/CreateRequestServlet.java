@@ -16,7 +16,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet("/createRequest")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.STUDENT_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.STUDENT_CREATE_REQUEST;
+
+@WebServlet(STUDENT_CREATE_REQUEST)
 public class CreateRequestServlet extends HttpServlet {
 
     private static final long serialVersionUID = 7856680687685113511L;
@@ -26,7 +29,7 @@ public class CreateRequestServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.studentService = (StudentService) ctx.getAttribute("studentService");
+        this.studentService = (StudentService) ctx.getAttribute(STUDENT_SERVICE);
     }
 
     @Override

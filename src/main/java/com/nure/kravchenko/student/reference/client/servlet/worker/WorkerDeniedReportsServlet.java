@@ -14,7 +14,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/workerDeniedReports")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.WORKER_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.WORKER_DENIED_REQUESTS;
+
+@WebServlet(WORKER_DENIED_REQUESTS)
 public class WorkerDeniedReportsServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1169149075048057707L;
@@ -24,7 +27,7 @@ public class WorkerDeniedReportsServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.workerService = (WorkerService) ctx.getAttribute("workerService");
+        this.workerService = (WorkerService) ctx.getAttribute(WORKER_SERVICE);
     }
 
     @Override

@@ -17,7 +17,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet("/adminApproveWorkers")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.ADMIN_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.ADMIN_APPROVE_WORKERS;
+
+@WebServlet(ADMIN_APPROVE_WORKERS)
 public class ApproveWorkersServlet extends HttpServlet {
 
     private static final long serialVersionUID = -3039044990665628912L;
@@ -27,7 +30,7 @@ public class ApproveWorkersServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.adminService = (AdminService) ctx.getAttribute("adminService");
+        this.adminService = (AdminService) ctx.getAttribute(ADMIN_SERVICE);
     }
 
     @Override

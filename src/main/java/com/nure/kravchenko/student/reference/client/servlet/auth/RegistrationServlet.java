@@ -16,7 +16,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet("/register")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.AUTH_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.AUTH_LOGIN;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.AUTH_REGISTER;
+
+@WebServlet(AUTH_REGISTER)
 public class RegistrationServlet extends HttpServlet {
 
     private static final long serialVersionUID = 538442085280973742L;
@@ -26,7 +30,7 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.authService = (AuthService) ctx.getAttribute("authService");
+        this.authService = (AuthService) ctx.getAttribute(AUTH_SERVICE);
     }
 
     @Override
@@ -76,7 +80,7 @@ public class RegistrationServlet extends HttpServlet {
 
             boolean registerResult = authService.register(registrationDto);
             if (registerResult) {
-                resp.sendRedirect(req.getContextPath() + "/login");
+                resp.sendRedirect(req.getContextPath() + AUTH_LOGIN);
             } else {
                 req.setAttribute("error", "Проблеми з реєстрацією");
                 doGet(req, resp);

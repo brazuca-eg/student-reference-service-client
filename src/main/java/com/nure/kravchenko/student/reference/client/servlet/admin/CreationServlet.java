@@ -20,7 +20,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet("/adminCreation")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.ADMIN_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.ADMIN_CREATION;
+
+@WebServlet(ADMIN_CREATION)
 public class CreationServlet extends HttpServlet {
 
     private static final long serialVersionUID = 6436614274872400258L;
@@ -30,7 +33,7 @@ public class CreationServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.adminService = (AdminService) ctx.getAttribute("adminService");
+        this.adminService = (AdminService) ctx.getAttribute(ADMIN_SERVICE);
     }
 
     @Override

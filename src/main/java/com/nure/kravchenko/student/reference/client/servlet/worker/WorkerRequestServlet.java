@@ -15,7 +15,11 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet("/workerRequests")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.WORKER_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.DOWNLOAD_PATH;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.WORKER_REQUESTS;
+
+@WebServlet(WORKER_REQUESTS)
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1 MB
         maxFileSize = 1024 * 1024 * 10,      // 10 MB
@@ -30,7 +34,7 @@ public class WorkerRequestServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.workerService = (WorkerService) ctx.getAttribute("workerService");
+        this.workerService = (WorkerService) ctx.getAttribute(WORKER_SERVICE);
     }
 
 
@@ -54,7 +58,7 @@ public class WorkerRequestServlet extends HttpServlet {
             String s3FileName = req.getParameter("s3FileName");
             req.getSession().setAttribute("s3FileName", s3FileName);
             RequestDispatcher dispatcher = getServletContext()
-                    .getRequestDispatcher("/download");
+                    .getRequestDispatcher(DOWNLOAD_PATH);
             dispatcher.forward(req, resp);
         }
 
@@ -90,7 +94,6 @@ public class WorkerRequestServlet extends HttpServlet {
         if (Objects.nonNull(req.getParameter("denyRequestButton"))) {
             Long deniedRequestId = Long.valueOf(req.getParameter("deniedRequestId"));
             String comment = req.getParameter("deniedComment");
-            // TODO: 01.05.2023
             workerService.approveRequest(id, deniedRequestId, false, comment, null, token);
         }
         doGet(req, resp);

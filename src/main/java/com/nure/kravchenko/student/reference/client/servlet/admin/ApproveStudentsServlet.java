@@ -15,7 +15,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/adminShowWaitingStudents")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.ADMIN_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.ADMIN_SHOW_WAITING_STUDENTS;
+
+@WebServlet(ADMIN_SHOW_WAITING_STUDENTS)
 public class ApproveStudentsServlet extends HttpServlet {
 
     private static final long serialVersionUID = 5178997234001144463L;
@@ -25,7 +28,7 @@ public class ApproveStudentsServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.adminService = (AdminService) ctx.getAttribute("adminService");
+        this.adminService = (AdminService) ctx.getAttribute(ADMIN_SERVICE);
     }
 
     @Override

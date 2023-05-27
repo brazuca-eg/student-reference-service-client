@@ -15,7 +15,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet("/workerReports")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.WORKER_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.WORKER_REPORTS;
+
+@WebServlet(WORKER_REPORTS)
 public class WorkerReportsServlet extends HttpServlet {
 
     private static final long serialVersionUID = 6648876982597062700L;
@@ -25,7 +28,7 @@ public class WorkerReportsServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.workerService = (WorkerService) ctx.getAttribute("workerService");
+        this.workerService = (WorkerService) ctx.getAttribute(WORKER_SERVICE);
     }
 
     @Override

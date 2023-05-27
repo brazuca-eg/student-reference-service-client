@@ -22,8 +22,10 @@ import java.util.Objects;
 
 import static com.nure.kravchenko.student.reference.client.service.filter.WorkerSearchReportFilter.filterReports;
 import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.WORKER_SEARCH_REQUEST_PAGE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.WORKER_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.WORKER_SEARCH_REQUESTS;
 
-@WebServlet("/searchRequest")
+@WebServlet(WORKER_SEARCH_REQUESTS)
 public class FindRequestServlet extends HttpServlet {
 
     private static final long serialVersionUID = 660788011919846701L;
@@ -33,7 +35,7 @@ public class FindRequestServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.workerService = (WorkerService) ctx.getAttribute("workerService");
+        this.workerService = (WorkerService) ctx.getAttribute(WORKER_SERVICE);
     }
 
     @Override

@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.ADMIN_SERVICE;
+
 @WebServlet("/adminShowStudent/*")
 public class WatchStudentServlet extends HttpServlet {
 
@@ -33,7 +35,7 @@ public class WatchStudentServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.adminService = (AdminService) ctx.getAttribute("adminService");
+        this.adminService = (AdminService) ctx.getAttribute(ADMIN_SERVICE);
     }
 
     @Override

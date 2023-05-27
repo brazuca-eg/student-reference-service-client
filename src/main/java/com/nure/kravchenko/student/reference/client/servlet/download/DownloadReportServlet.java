@@ -14,7 +14,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-@WebServlet("/download")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.WORKER_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.DOWNLOAD_PATH;
+
+@WebServlet(DOWNLOAD_PATH)
 public class DownloadReportServlet extends HttpServlet {
 
     private static final long serialVersionUID = -8035025560059504668L;
@@ -24,7 +27,7 @@ public class DownloadReportServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.workerService = (WorkerService) ctx.getAttribute("workerService");
+        this.workerService = (WorkerService) ctx.getAttribute(WORKER_SERVICE);
     }
 
 

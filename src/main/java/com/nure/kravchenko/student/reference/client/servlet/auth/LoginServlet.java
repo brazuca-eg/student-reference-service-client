@@ -17,7 +17,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebServlet("/login")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.AUTH_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.ADMIN_MAIN;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.AUTH_LOGIN;
+
+@WebServlet(AUTH_LOGIN)
 public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 6904919491945405362L;
@@ -27,7 +31,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.authService = (AuthService) ctx.getAttribute("authService");
+        this.authService = (AuthService) ctx.getAttribute(AUTH_SERVICE);
     }
 
     @Override
@@ -71,7 +75,7 @@ public class LoginServlet extends HttpServlet {
                             resp.sendRedirect(req.getContextPath() + "/worker");
                         }
                     } else if (StringUtils.equalsIgnoreCase(Role.ADMIN.name(), role)) {
-                        resp.sendRedirect(req.getContextPath() + "/admin");
+                        resp.sendRedirect(req.getContextPath() + ADMIN_MAIN);
                     }
 
                     if (!isApprovedAccount) {

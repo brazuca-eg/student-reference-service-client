@@ -16,7 +16,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/studentDeniedRequests")
+import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.STUDENT_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.STUDENT_DENIED_REQUESTS;
+
+@WebServlet(STUDENT_DENIED_REQUESTS)
 public class StudentDeniedRequestsServlet extends HttpServlet {
 
     private static final long serialVersionUID = -8123129913040882413L;
@@ -26,7 +29,7 @@ public class StudentDeniedRequestsServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext ctx = getServletContext();
-        this.studentService = (StudentService) ctx.getAttribute("studentService");
+        this.studentService = (StudentService) ctx.getAttribute(STUDENT_SERVICE);
     }
 
     @Override

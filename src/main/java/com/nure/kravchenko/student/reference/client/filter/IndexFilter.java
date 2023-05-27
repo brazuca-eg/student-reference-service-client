@@ -9,18 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.*;
+
 @Log4j
 @WebFilter(filterName = "indexingFilter", urlPatterns = {"/ ", "/login/*", "/register/*"})
 public class IndexFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-        log.info("IndexFilter init...");
+        log.info("IndexFilter init work...");
     }
 
     @Override
     public void destroy() {
-        log.info("IndexFilter destroy...");
+        log.info("IndexFilter destroy work...");
     }
 
     @Override
@@ -32,13 +34,13 @@ public class IndexFilter implements Filter {
         if (id != null) {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             if (role.equalsIgnoreCase(Role.STUDENT.name())) {
-                response.sendRedirect(req.getContextPath() + "/student");
+                response.sendRedirect(req.getContextPath() + STUDENT_MAIN);
                 return;
             } else if (role.equalsIgnoreCase(Role.WORKER.name())) {
-                response.sendRedirect(req.getContextPath() + "/worker");
+                response.sendRedirect(req.getContextPath() + WORKER_MAIN);
                 return;
             } else if (role.equalsIgnoreCase(Role.ADMIN.name())) {
-                response.sendRedirect(req.getContextPath() + "/admin");
+                response.sendRedirect(req.getContextPath() + ADMIN_MAIN);
                 return;
             }
         }
