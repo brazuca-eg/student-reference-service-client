@@ -89,7 +89,7 @@ public class CreationServlet extends HttpServlet {
                     .name(req.getParameter("groupName"))
                     .learnForm(req.getParameter("groupLearnForm"))
                     .degreeForm(req.getParameter("groupDegreeForm"))
-                    .startYear(LocalDate.parse(req.getParameter("groupEndYear")))
+                    .startYear(LocalDate.parse(req.getParameter("groupStartYear")))
                     .endYear(LocalDate.parse(req.getParameter("groupEndYear")))
                     .specialityId(Long.valueOf(req.getParameter("specialityForGroup")))
                     .build();
