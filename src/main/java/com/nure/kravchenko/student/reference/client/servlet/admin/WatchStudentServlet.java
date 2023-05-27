@@ -20,8 +20,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.ADMIN_SHOW_STUDENT_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.ADMIN_SERVICE;
@@ -57,7 +59,9 @@ public class WatchStudentServlet extends HttpServlet {
         }
 
         List<StudentGroupDto> studentGroups = adminService.getAllGroups(token);
-        req.setAttribute("studentGroups", studentGroups);
+        req.setAttribute("studentGroups", studentGroups.stream()
+                .sorted(Comparator.comparing(StudentGroupDto::getName))
+                .collect(Collectors.toList()));
 
         List<String> nonActiveReasons = Arrays.asList("Академічна відпустка", "Відраховано", "Зміна освітньої форми");
         req.setAttribute("nonActiveReasons", nonActiveReasons);

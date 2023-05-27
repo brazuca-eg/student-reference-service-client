@@ -1,7 +1,6 @@
 package com.nure.kravchenko.student.reference.client.filter;
 
 import com.nure.kravchenko.student.reference.client.model.Role;
-import com.nure.kravchenko.student.reference.client.model.Student;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,8 +44,9 @@ public class SecurityFilter implements Filter {
         } else if (Objects.isNull(role) && currentUrl.contains("logout")) {
             servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);
             return;
-        } else if(!isApprovedAccount && (!StringUtils.containsIgnoreCase(currentUrl, "waiting")) ||
-                !StringUtils.containsIgnoreCase(currentUrl, "logout")){
+        } else if(!isApprovedAccount &&
+                (!StringUtils.containsIgnoreCase(currentUrl, "waiting") ||
+                !StringUtils.containsIgnoreCase(currentUrl, "logout"))) {
             servletRequest.getRequestDispatcher(ERROR_403).forward(servletRequest, servletResponse);
             return;
         }

@@ -25,13 +25,13 @@
                     <div class="row g-3">
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="facultyName" name="facultyName" placeholder="Введіть назву факультету">
+                                <input type="text" class="form-control" id="facultyName" name="facultyName" placeholder="Введіть назву факультету" required>
                                 <label for="facultyName">Назва факультету</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="facultyShortName" name="facultyShortName" placeholder="Введіть скорочену назву факультету">
+                                <input type="text" class="form-control" id="facultyShortName" name="facultyShortName" placeholder="Введіть скорочену назву факультету" required>
                                 <label for="facultyShortName">Скорочена назва факультету</label>
                             </div>
                         </div>
@@ -62,34 +62,34 @@
                     <div class="row g-3">
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="specialityName" name="specialityName" placeholder="Введіть назву спеціальності">
+                                <input type="text" class="form-control" id="specialityName" name="specialityName" placeholder="Введіть назву спеціальності" required>
                                 <label for="specialityName">Назва спеціальності</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="specialityShortName" name="specialityShortName" placeholder="Введіть скорочену назву спеціальності">
+                                <input type="text" class="form-control" id="specialityShortName" name="specialityShortName" placeholder="Введіть скорочену назву спеціальності" required>
                                 <label for="specialityShortName">Скорочена назва спеціальності</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="number" class="form-control" id="specialityNumber" name="specialityNumber" placeholder="Введіть номер спеціальності">
+                                <input type="number" class="form-control" id="specialityNumber" name="specialityNumber" placeholder="Введіть номер спеціальності" required>
                                 <label for="specialityNumber">Номер спеціальності</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="educationalProgram" name="educationalProgram" placeholder="Введіть назву освітньої програми">
+                                <input type="text" class="form-control" id="educationalProgram" name="educationalProgram" placeholder="Введіть назву освітньої програми" required>
                                 <label for="educationalProgram">Освітня програма</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <select name="faculty" id="faculty" class="form-control">
+                                <select name="faculty" id="faculty" class="form-control" required>
                                     <c:forEach items="${faculties}" var="element">
                                         <h3><c:out value="${element.name}"/></h3>
-                                        <option value="<c:out value="${element.id}"/>"><c:out value="${element.name}"/></option>
+                                        <option value="<c:out value="${element.id}"/>"><c:out value="${element.name}"/> [<c:out value="${element.shortName}"/>]</option>
                                     </c:forEach>
                                 </select>
                                 <label for="faculty">Оберіть факультет спеціальності</label>
@@ -121,7 +121,7 @@
                     <div class="row g-3">
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="groupName" name="groupName" placeholder="Введіть назву групи"/>
+                                <input type="text" class="form-control" id="groupName" name="groupName" placeholder="Введіть назву групи" required/>
                                 <label for="groupName">Назва групи</label>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <select name="groupDegreeForm" id="groupDegreeForm" class="form-control">
+                                <select name="groupDegreeForm" id="groupDegreeForm" class="form-control" required>
                                     <option value="Бакалавр">Бакалавр</option>
                                     <option value="Магістр">Магістр</option>
                                 </select>
@@ -145,19 +145,19 @@
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="date" class="form-control" id="groupStartYear" name="groupStartYear" placeholder="Оберіть дату початку навчання групи"/>
+                                <input type="date" class="form-control" id="groupStartYear" name="groupStartYear" placeholder="Оберіть дату початку навчання групи" required/>
                                 <label for="groupStartYear">Дата початку навчання групи</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="date" class="form-control" id="groupEndYear" name="groupEndYear" placeholder="Оберіть дату закінчення навчання групи"/>
+                                <input type="date" class="form-control" id="groupEndYear" name="groupEndYear" placeholder="Оберіть дату закінчення навчання групи" required/>
                                 <label for="groupEndYear">Дата закінчення навчання групи</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <select name="specialityForGroup" id="specialityForGroup" class="form-control">
+                                <select name="specialityForGroup" id="specialityForGroup" class="form-control" required>
                                     <c:forEach items="${specialities}" var="element">
                                         <h3><c:out value="${element.name}"/></h3>
                                         <option value="<c:out value="${element.id}"/>"><c:out value="${element.number}"/> <c:out value="${element.name}"/> - <c:out value="${element.educationalProgram}"/></option>
