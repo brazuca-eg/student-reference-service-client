@@ -23,6 +23,7 @@ import java.util.Objects;
 import static com.nure.kravchenko.student.reference.client.service.filter.WorkerSearchReportFilter.filterReports;
 import static com.nure.kravchenko.student.reference.client.service.utils.PageConstants.WORKER_SEARCH_REQUEST_PAGE;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServiceConstants.WORKER_SERVICE;
+import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.DOWNLOAD_PATH;
 import static com.nure.kravchenko.student.reference.client.service.utils.ServletPathConstants.WORKER_SEARCH_REQUESTS;
 
 @WebServlet(WORKER_SEARCH_REQUESTS)
@@ -44,6 +45,14 @@ public class FindRequestServlet extends HttpServlet {
         String token = (String) session.getAttribute("token");
         Long id = (Long) session.getAttribute("userId");
         req.setCharacterEncoding("UTF-8");
+
+        if (Objects.nonNull(req.getParameter("downloadReport"))) {
+            String s3FileName = req.getParameter("s3FileName");
+            req.getSession().setAttribute("s3FileName", s3FileName);
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher(DOWNLOAD_PATH);
+            dispatcher.forward(req, resp);
+        }
 
         List<ReasonDto> reasons = workerService.getAllRequestReasons(token);
         req.setAttribute("reasons", reasons);
