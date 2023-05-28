@@ -36,6 +36,7 @@ public class AdminMainServlet extends HttpServlet {
         HttpSession session = req.getSession();
         Long id = (Long) session.getAttribute("userId");
         String token = (String) session.getAttribute("token");
+        req.setCharacterEncoding("UTF-8");
 
         WorkerDto workerDto = adminService.getAdminById(id, token);
         if (Objects.nonNull(workerDto)) {
