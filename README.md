@@ -1,4 +1,8 @@
-1) Програмна система для замовлення довідок про навчання з деканату для здобувачів вищої освіти;
-2) Кравченко Єгор Максимович, ПЗПІ-19-1;
-3) д.т.н, проф. каф. ПІ Єрохін А.Л.;
-4) 2023;
+Client part for the "Software system for ordering study certificates from the dean's office for higher education applicants"
+
+Main technologies that were used:
+− Java;
+- Servlet API;
+- HTML, CSS, Bootstrap, JSP pages;
+- AWS S3;
+- RestTemplate;
